@@ -721,6 +721,47 @@ button:hover {
 .btn:last-child {
   margin-right: 0;
 }
+
+#header {
+  position: relative;
+}
+.menu-icon {
+  display: none;
+  cursor: pointer;
+  font-size: 24px;
+  margin-right: 20px;
+}
+.stellarnav {
+  display: flex;
+}
+.stellarnav.active {
+  display: block;
+}
+@media (max-width: 760px) {
+  .menu-icon {
+    display: block;
+  }
+  .stellarnav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 10px;
+    width: 100%;
+  }
+  .menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .menu-list li {
+    margin: 10px 0;
+  }
+}
 .btn:active,
 .btn.btn-outline-light:active,
 .btn.btn-outline-dark:active,

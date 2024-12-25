@@ -4,7 +4,7 @@ import { ShopContext } from "./context/Shopcontext";
 const Selling_product = () => {
   const [product, setProduct] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const {  addtocart } = useContext(ShopContext);
+  const { addtocart } = useContext(ShopContext);
 
 
   useEffect(() => {
@@ -80,6 +80,7 @@ const Selling_product = () => {
           <div className="tab-content">
             <div className="row d-flex flex-wrap">
               {filteredProducts.map((item) => (
+            
                 <div
                   className="product-item col-lg-3 col-md-6 col-sm-6"
                   key={item.id}
@@ -98,6 +99,7 @@ const Selling_product = () => {
                       <button
                         type="button"
                         className="btn-wrap cart-link d-flex align-items-center"
+                        onClick={()=> addtocart(item.id)}
                       >
                         add to cart <i className="icon icon-arrow-io" />
                       </button>
@@ -108,7 +110,7 @@ const Selling_product = () => {
                         <i className="icon icon-screen-full" />
                         <span className="tooltip-text">Quick view</span>
                       </button>
-                      <button type="button" className="wishlist-btn"  onClick={()=> addtocart(product.id)}>
+                      <button type="button" className="wishlist-btn" >
                         <i className="icon icon-heart" />
                       </button>
                     </div>

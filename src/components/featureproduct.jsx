@@ -25,12 +25,12 @@ const Featureproduct = () => {
         <div className="swiper-slide" style={{width:"350px",marginLeft:"10px",height:"600px"}} key={product.id}>
           <div className="product-item">
             <div className="image-holder">
-              <img src={product.image} alt="Books" className="product-image"style={{height:"400px"}}
-              onClick={()=> addtocart(product.id)}/>
+              <img src={product.image} alt="Books" className="product-image"style={{height:"400px"}}/>
+             
             </div>
             <div className="cart-concern">
               <div className="cart-button d-flex justify-content-between align-items-center">
-                <button type="button" className="btn-wrap cart-link d-flex align-items-center">add to cart <i className="icon icon-arrow-io" />
+                <button type="button" className="btn-wrap cart-link d-flex align-items-center"  onClick={()=> addtocart(product.id)}>add to cart <i className="icon icon-arrow-io" />
                 </button>
                 <button type="button" className="view-btn tooltip
                   d-flex">
