@@ -1,41 +1,52 @@
 import { useContext, useEffect, useState } from "react";
 import { ShopContext } from "./context/Shopcontext";
+import { Authcontext } from "./context/Authcontact";
 
 const Selling_product = () => {
   const [product, setProduct] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const { addtocart } = useContext(ShopContext);
+   const { user } = useContext(Authcontext);
+    const [categorylist, setcategorylist] = useState([]);
+    console.log(categorylist);
+    
+    console.log(user.token);
 
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products?limit=12")
+    fetch("http://localhost:8000/api/sellerproduct")
       .then((res) => res.json())
       .then((json) => {
-        setProduct(json);
-        console.log(json);
+        setProduct(json.product);
       })
       .catch((error) => console.error("Fetch error:", error));
-  }, []);
+      const category = async () => {
+        const respones = await fetch("http://localhost:8000/api/category", {
+          method: "GET",
+          headers: {
+            "Content-type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${user.token} `,
+          },
+        });
+  
+        const data = await respones.json();
+        if (data.status == 200) {
+          setcategorylist(data.data);
+        }
+      };
+  
+      category();
+      
+  },[ user.token]);
 
   const filteredProducts = 
     selectedCategory === "all"
       ? product
-      : product.filter((item) => {
-          if (selectedCategory === "jewelery") {
-            return item.category === "jewelery";
-          }
-          if (selectedCategory === "men's clothing") {
-            return item.category === "men's clothing";
-          }
-          if (selectedCategory === "electronics") {
-            return item.category === "electronics";
-          }
-          return false;
-        });
+      : product.filter((item) => item.category_id === selectedCategory);
 
-  const handleTabClick = (category) => {
-    setSelectedCategory(category);
-    console.log("Selected category:", category);
+  const handleTabClick = (categoryId) => {
+    setSelectedCategory(categoryId);
   };
 
   return (
@@ -56,24 +67,16 @@ const Selling_product = () => {
               All
             </li>
   
-            <li
-              onClick={() => handleTabClick("men's clothing")}
-              className={`tab ${selectedCategory === "men's clothing" ? "active" : ""}`}
-            >
-              men&apos;s clothing
-            </li>
-            <li
-              onClick={() => handleTabClick("jewelery")}
-              className={`tab ${selectedCategory === "jewelery" ? "active" : ""}`}
-            >
-              jewelery
-              </li>
+            {categorylist.map((category) => (
               <li
-              onClick={() => handleTabClick("electronics")}
-              className={`tab ${selectedCategory === "electronics" ? "active" : ""}`}
-            >
-              electronics
+                key={category.id}
+                onClick={() => handleTabClick(category.id)}
+                className={`tab ${selectedCategory === category.id ? "active" : ""}`}
+              >
+                {category.name}
               </li>
+            ))}
+             
 
       
           </ul>
@@ -88,7 +91,7 @@ const Selling_product = () => {
                 >
                   <div className="image-holder">
                     <img
-                      src={item.image}
+                      src={item.image_url}
                       alt={item.title}
                       className="product-image"
                       style={{ height: "400px", objectFit: "contain" }}

@@ -1,13 +1,14 @@
 import { useContext, useEffect, useState } from "react"
 import { ShopContext } from "./context/Shopcontext";
+import { Link } from "react-router-dom";
 
 const Featureproduct = () => {
     const [product,setproduct] = useState([])
     const {  addtocart } = useContext(ShopContext);
     useEffect(()=>{
-        fetch('https://fakestoreapi.com/products?limit=4')
+        fetch('http://localhost:8000/api/FeaturedProducts')
         .then(res=>res.json())
-        .then(json=>{setproduct(json),console.log(json)})
+        .then(json=>{setproduct(json.product),console.log("data",json.product)})
     },[])
   return (
     <>
@@ -25,7 +26,7 @@ const Featureproduct = () => {
         <div className="swiper-slide" style={{width:"350px",marginLeft:"10px",height:"600px"}} key={product.id}>
           <div className="product-item">
             <div className="image-holder">
-              <img src={product.image} alt="Books" className="product-image"style={{height:"400px"}}/>
+            <Link to={`/shop/${product.id}`}> <img src={product.image_url} alt="Books" className="product-image"style={{height:"400px"}}/> </Link>  
              
             </div>
             <div className="cart-concern">

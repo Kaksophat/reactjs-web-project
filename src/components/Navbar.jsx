@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ShopContext } from "./context/Shopcontext";
 
 const Navbar = () => {
-  const { gettotalcartitem } = useContext(ShopContext);
+  const { getqty } = useContext(ShopContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -36,7 +36,7 @@ const Navbar = () => {
                       <Link to={"/cart"}>
                         <div className="cart">
                           <i className="icon icon-shopping-cart" />
-                          <div className="cart-count">{gettotalcartitem()}</div>
+                          <div className="cart-count">{getqty()}</div>
                         </div>
                       </Link>
                     </li>
@@ -60,7 +60,7 @@ const Navbar = () => {
               <div className="row d-flex align-items-center">
                 <div className="col-lg-2 col-md-2">
                   <div className="main-logo">
-                    <Link to={"/"}>Shop</Link>
+                    <Link to={"/"}>Ultras</Link>
                   </div>
                 </div>
                 <div className="col-lg-10 col-md-10">
