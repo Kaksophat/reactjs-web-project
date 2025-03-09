@@ -23,9 +23,7 @@ const App = () => {
         {/* Public Routes */}
   
        <Route path='/*' element={
-        <Authrequird>
-        <Customeroute/>
-        </Authrequird>}/>
+        <Customeroute/>}/>
       
 
         {/* Admin Routes */}
