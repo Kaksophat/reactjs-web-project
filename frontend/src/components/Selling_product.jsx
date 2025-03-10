@@ -5,40 +5,36 @@ import { Authcontext } from "./context/Authcontact";
 const Selling_product = () => {
   const [product, setProduct] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const { addtocart } = useContext(ShopContext);
-   const { user } = useContext(Authcontext);
+  // const { addtocart } = useContext(ShopContext);
+  //  const { user } = useContext(Authcontext);
     const [categorylist, setcategorylist] = useState([]);
     console.log(categorylist);
     
-    console.log(user.token);
+    // console.log(user.token);
 
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/sellerproduct")
-      .then((res) => res.json())
-      .then((json) => {
-        setProduct(json.product);
-      })
-      .catch((error) => console.error("Fetch error:", error));
+    // fetch("http://localhost:8000/api/sellerproduct")
+    //   .then((res) => res.json())
+    //   .then((json) => {
+    //     setProduct(json.product);
+    //   })
+      // .catch((error) => console.error("Fetch error:", error));
       const category = async () => {
-        const respones = await fetch("http://localhost:8000/api/category", {
+        const respones = await fetch("http://localhost:8000/api/categories", {
           method: "GET",
-          headers: {
-            "Content-type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${user.token} `,
-          },
+       
         });
   
         const data = await respones.json();
         if (data.status == 200) {
-          setcategorylist(data.data);
+          setcategorylist(data.category);
         }
       };
   
       category();
       
-  },[ user.token]);
+  },[]);
 
   const filteredProducts = 
     selectedCategory === "all"

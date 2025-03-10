@@ -46,12 +46,16 @@ const App = () => {
         {/* Public Routes */}
   
        <Route path='/*' element={
+<<<<<<< HEAD
         <Customeroute/>
        }/>
 
 <Route path='/admin/*' element={
         <Adminroute/>
        }/>
+=======
+        <Customeroute/>}/>
+>>>>>>> origin/rotana
       
 
        
@@ -59,7 +63,6 @@ const App = () => {
           
 
          
-        
         </Routes>
     </>
   );
