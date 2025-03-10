@@ -1,21 +1,44 @@
-import { Routes, Route} from 'react-router-dom';
+import { Routes, Route, useLocation} from 'react-router-dom';
 // import Navbar from './components/Navbar';
 
 
-import AdminLayout from './page/Adminlayout';
-import AdminDashboard from './page/AdminDashboard';
+
 import Customeroute from './components/Customeroute';
-import { Authrequird } from './page/Authrequird';
-import Admincategory from './page/Admincategory';
-import Adminproduct from './page/product/Adminproduct';
-import Editeproduct from './page/product/Edite';
+
+import Adminroute from './page/include/Adminroute';
+import { useEffect } from 'react';
 
 
 const App = () => {
-  // const location = useLocation();
+  const location = useLocation();
 
-  // // Define routes where Navbar and Footer should not appear
-  // const hideNavbarFooter = location.pathname.startsWith('/admin') &&  location.pathname.startsWith('/admin/dashboard');
+  useEffect(() => {
+    const adminStylesheet = "/admin/style.css";
+    const customerStylesheet = "/admin/bootstrap.min.css";
+    let linkElement = document.getElementById("admin-style");
+    let link = document.getElementById("customer-style");
+
+    if (location.pathname.startsWith("/admin")) {
+      if (!linkElement && !link) {
+        linkElement = document.createElement("link");
+        link = document.createElement("link");
+        link.id = "customer-style";
+        link.rel = "stylesheet";
+        link.href = customerStylesheet;
+        document.head.appendChild(link);
+
+        linkElement.id = "admin-style";
+        linkElement.rel = "stylesheet";
+        linkElement.href = adminStylesheet;
+        document.head.appendChild(linkElement);
+      }
+    } else {
+      if (linkElement && link) {
+        linkElement.remove();
+        link.remove();
+      }
+    }
+  }, [location.pathname]);
 
   return (
     <>
@@ -23,35 +46,15 @@ const App = () => {
         {/* Public Routes */}
   
        <Route path='/*' element={
-        <Authrequird>
         <Customeroute/>
-        </Authrequird>}/>
+       }/>
+
+<Route path='/admin/*' element={
+        <Adminroute/>
+       }/>
       
 
-        {/* Admin Routes */}
-        <Route path="/admin" element={<AdminLayout />}/>
-        <Route path='/admin/dashboard' element={
-          <Authrequird>
-            <AdminDashboard/>
-          </Authrequird>
-        } />
-          <Route path='/admin/category' element={
-          <Authrequird>
-            <Admincategory/>
-          </Authrequird>
-        } />
-
-         <Route path='/admin/product' element={
-          <Authrequird>
-            <Adminproduct/>
-          </Authrequird>
-        } />
-           <Route path='/admin/product/edit/:productid' element={
-          <Authrequird>
-            <Editeproduct/>
-          </Authrequird>
-        } />
-
+       
 
           
 
