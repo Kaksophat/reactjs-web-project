@@ -6,9 +6,9 @@ const Featureproduct = () => {
     const [product,setproduct] = useState([])
     const {  addtocart } = useContext(ShopContext);
     useEffect(()=>{
-        fetch('http://localhost:8000/api/FeaturedProducts')
+        fetch('http://localhost:8000/api/products')
         .then(res=>res.json())
-        .then(json=>{setproduct(json.product),console.log("data",json.product)})
+        .then(json=>{setproduct(json.products),console.log("data",json.product)})
     },[])
   return (
     <>
