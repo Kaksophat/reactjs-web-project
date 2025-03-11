@@ -10,6 +10,7 @@ class categorycontroller extends Controller
 {
     public function index (Request $request){
         $category = category::orderBy("created_at","asc")->get();
+        
 
         return response()->json([
             "status" => 200,
