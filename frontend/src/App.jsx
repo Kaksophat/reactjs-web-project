@@ -7,6 +7,7 @@ import Customeroute from './components/Customeroute';
 
 import Adminroute from './page/include/Adminroute';
 import { useEffect } from 'react';
+import Adminlogin from './page/adminlogin';
 
 
 const App = () => {
@@ -15,6 +16,7 @@ const App = () => {
   useEffect(() => {
     const adminStylesheet = "/admin/style.css";
     const customerStylesheet = "/admin/bootstrap.min.css";
+    const login = "/admin/login";
     let linkElement = document.getElementById("admin-style");
     let link = document.getElementById("customer-style");
 
@@ -33,7 +35,7 @@ const App = () => {
         document.head.appendChild(linkElement);
       }
     } else {
-      if (linkElement && link) {
+      if (linkElement && link && login ) {
         linkElement.remove();
         link.remove();
       }
@@ -45,17 +47,16 @@ const App = () => {
       <Routes>
         {/* Public Routes */}
   
-       <Route path='/*' element={
-<<<<<<< HEAD
+     
+        <Route path='/*' element={
         <Customeroute/>
        }/>
 
-<Route path='/admin/*' element={
+       <Route path='/admin/*' element={
         <Adminroute/>
        }/>
-=======
-        <Customeroute/>}/>
->>>>>>> origin/rotana
+
+       <Route path='/admin/login' element={<Adminlogin/>} />
       
 
        
