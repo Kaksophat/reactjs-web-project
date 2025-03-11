@@ -1,5 +1,7 @@
 import { BsClipboard2Fill } from "react-icons/bs";
-import { BsFillLayersFill } from "react-icons/bs";
+import { MdCategory } from "react-icons/md";
+import { TbBrand4Chan } from "react-icons/tb";
+import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 const Header = () => {
   return (
     <>
@@ -21,11 +23,11 @@ const Header = () => {
     <div className="navbar-nav w-100">
       <a href="index.html" className="nav-item nav-link active"> {<BsClipboard2Fill className="me-2 fa"/>} Dashboard</a>
       <div className="nav-item dropdown">
-        <a href="#" className="nav-link "> {<BsFillLayersFill className="me-2 fa"/>} Category </a>
+        <a href="#" className="nav-item nav-link "> {<MdCategory style={{fontSize:'24px'}} />} Category </a>
        
       </div>
-      <a href="widget.html" className="nav-item nav-link"> Brand </a>
-      <a href="form.html" className="nav-item nav-link">Product</a>
+      <a href="widget.html" className="nav-item nav-link">{<TbBrand4Chan style={{fontSize:'24px'}}/>} Brand </a>
+      <a href="form.html" className="nav-item nav-link">{<MdOutlineProductionQuantityLimits style={{fontSize:'24px'}} />}Product</a>
     
     </div>
   </nav>

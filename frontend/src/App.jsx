@@ -1,14 +1,11 @@
-import { Routes, Route, useLocation} from 'react-router-dom';
+import { Routes, Route, useLocation } from "react-router-dom";
 // import Navbar from './components/Navbar';
 
+import Customeroute from "./components/Customeroute";
 
-
-import Customeroute from './components/Customeroute';
-
-import Adminroute from './page/include/Adminroute';
-import { useEffect } from 'react';
-import Adminlogin from './page/adminlogin';
-
+import Adminroute from "./page/include/Adminroute";
+import { useEffect } from "react";
+import Adminlogin from "./page/adminlogin";
 
 const App = () => {
   const location = useLocation();
@@ -35,7 +32,7 @@ const App = () => {
         document.head.appendChild(linkElement);
       }
     } else {
-      if (linkElement && link && login ) {
+      if (linkElement && link && login) {
         linkElement.remove();
         link.remove();
       }
@@ -46,25 +43,13 @@ const App = () => {
     <>
       <Routes>
         {/* Public Routes */}
-  
-     
-        <Route path='/*' element={
-        <Customeroute/>
-       }/>
 
-       <Route path='/admin/*' element={
-        <Adminroute/>
-       }/>
+        <Route path="/*" element={<Customeroute />} />
 
-       <Route path='/admin/login' element={<Adminlogin/>} />
-      
+        <Route path="/admin/*" element={<Adminroute />} />
 
-       
-
-          
-
-         
-        </Routes>
+        <Route path="/admin/login" element={<Adminlogin />} />
+      </Routes>
     </>
   );
 };
