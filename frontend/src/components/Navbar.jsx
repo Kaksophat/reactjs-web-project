@@ -28,9 +28,9 @@ const Navbar = () => {
                 <div className="col-md-4 col-sm-12 user-items">
                   <ul className="d-flex justify-content-end list-unstyled">
                     <li>
-                      <a href="login.html">
+                      <Link to="/admin/">
                         <i className="icon icon-user" />
-                      </a>
+                      </Link>
                     </li>
                     <li>
                       <Link to={"/cart"}>
@@ -74,16 +74,15 @@ const Navbar = () => {
                       id="main-nav"
                       className={`stellarnav d-flex justify-content-end right ${
                         isMenuOpen ? "active" : ""
-                      }`}
-                    >
+                      }`}>
                       <ul className="menu-list">
                         <li className="menu-item has-sub">
-                          <Link to={"/"}>
-                            Home
-                          </Link>
+                          <Link to={"/"}>Home</Link>
                           <ul className="submenu">
                             <li>
-                              <a href="index.html" className="item-anchor active">
+                              <a
+                                href="index.html"
+                                className="item-anchor active">
                                 Home
                               </a>
                             </li>
@@ -113,6 +112,7 @@ const Navbar = () => {
           </nav>
         </div>
       </header>
-      </>
-      )}
-      export default Navbar;
+    </>
+  );
+};
+export default Navbar;
