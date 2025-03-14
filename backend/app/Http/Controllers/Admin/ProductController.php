@@ -27,7 +27,7 @@ class ProductController extends Controller
             'brand_id' => 'required',
             'price' => 'required',
             'quantity' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required',
             'description' => 'required',
             'status' => 'required',
         ]);
@@ -58,20 +58,37 @@ class ProductController extends Controller
         ]);
     }
 
-    public function update ($id,Request $request)
-    {
+    public function getsingleproduct ($id,Request $request){
         $product = product::find($id);
 
         if(!$product){
             return response()->json([
                 "status" => 404,
-                "message" =>  "product not found"
+                "message" => "product not found with id $id"
+
             ]);
         };
 
+        return response()->json([
+            "status" => 200,
+            "product" => $product
+        ]);
+    }
+
+    public function update($id, Request $request)
+    {
+        $product = Product::find($id);
+    
+        if (!$product) {
+            return response()->json([
+                "status" => 404,
+                "message" => "Product not found"
+            ]);
+        }
+    
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $imageName = time() . '.' . $image->Extension();
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('/uploads'), $imageName);
     
             // Delete old image if it exists
@@ -82,8 +99,6 @@ class ProductController extends Controller
             $product->image = $imageName;
         }
     
-          
-        
         $product->category_id = $request->category_id;
         $product->brand_id = $request->brand_id;
         $product->title = $request->title;
@@ -92,11 +107,11 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->status = $request->status;
         $product->save();
+    
         return response()->json([
             "status" => 200,
-            "product" =>  $product
+            "product" => $product
         ]);
-
     }
 
     public function delete($id,Request $request)

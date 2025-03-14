@@ -13,6 +13,15 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [AuthController::class, 'register']);
 Route::get("/categories",[categorycontroller::class,"index"]);
 Route::get("/products",[ProductController::class,"index"]);
+Route::get("/brands",[brandcontroller::class,"index"]);
+Route::post("/products",[ProductController::class,"store"]);
+Route::get("/products/{id}",[ProductController::class,"getsingleproduct"]);
+Route::put("/products/{id}",[ProductController::class,"update"]);
+Route::delete("/products/{id}",[ProductController::class,"delete"]);
+
+
+
+
 
 
 
@@ -28,7 +37,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::delete("/category/{id}",[categorycontroller::class,"delete"]);
     Route::get("/product",[ProductController::class,"index"]);
     Route::post("/product",[ProductController::class,"store"]);
-    Route::put("/product/{id}",[ProductController::class,"update"]);
+    Route::get("/product/{id}",[ProductController::class,"getsingleproduct"]);
     Route::put("/product/{id}",[ProductController::class,"update"]);
     Route::delete("/product/{id}",[ProductController::class,"delete"]);
 });
