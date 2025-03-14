@@ -2,7 +2,9 @@ import { BsClipboard2Fill } from "react-icons/bs";
 import { MdCategory } from "react-icons/md";
 import { TbBrand4Chan } from "react-icons/tb";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
+import { Link, useLocation } from "react-router-dom";
 const Header = () => {
+  const location=useLocation()
   return (
     <>
       <div className="sidebar pe-4 pb-3">
@@ -21,13 +23,12 @@ const Header = () => {
       </div>
     </div>
     <div className="navbar-nav w-100">
-      <a href="index.html" className="nav-item nav-link active"> {<BsClipboard2Fill className="me-2 fa"/>} Dashboard</a>
+      <Link to="/admin/dashboard" className={`nav-item nav-link ${location.pathname === "/admin/dashboard" ? "active" : ""}`}> {<BsClipboard2Fill className="me-2 fa"/>} Dashboard</Link>
       <div className="nav-item dropdown">
-        <a href="#" className="nav-item nav-link "> {<MdCategory style={{fontSize:'24px'}} />} Category </a>
-       
+        <Link to="/admin/category" className={`nav-item nav-link ${location.pathname === "/admin/category" ? "active" : ""}`}> {<MdCategory style={{fontSize:'24px'}} />} Category </Link> 
       </div>
-      <a href="widget.html" className="nav-item nav-link">{<TbBrand4Chan style={{fontSize:'24px'}}/>} Brand </a>
-      <a href="form.html" className="nav-item nav-link">{<MdOutlineProductionQuantityLimits style={{fontSize:'24px'}} />}Product</a>
+      <Link to="/admin/brand" className={`nav-item nav-link ${location.pathname === "/admin/brand" ? "active" : ""}`}>{<TbBrand4Chan style={{fontSize:'24px'}}/>} Brand </Link>
+      <Link to="/admin/product" className={`nav-item nav-link ${location.pathname === "/admin/product" ? "active" : ""}`}>{<MdOutlineProductionQuantityLimits style={{fontSize:'24px'}} />}Product</Link>
     
     </div>
   </nav>

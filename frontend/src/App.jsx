@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 // import Navbar from './components/Navbar';
 
 import Customeroute from "./components/Customeroute";
@@ -47,6 +47,9 @@ const App = () => {
         <Route path="/*" element={<Customeroute />} />
 
         <Route path="/admin/*" element={<Adminroute />} />
+
+        {/* Default redirection or other routes */}
+        <Route path="*" element={<Navigate to="/admin" />} />
 
         <Route path="/admin/login" element={<Adminlogin />} />
       </Routes>
