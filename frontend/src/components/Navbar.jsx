@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ShopContext } from "./context/Shopcontext";
 
 const Navbar = () => {
   const { getqty } = useContext(ShopContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const location=useLocation
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -77,7 +77,7 @@ const Navbar = () => {
                       }`}>
                       <ul className="menu-list">
                         <li className="menu-item has-sub">
-                          <Link to={"/"}>Home</Link>
+                          <Link to={"/"} className={`nav-item nav-link ${location.pathname==="/" ? "active ":" "}`}>Home</Link>
                           <ul className="submenu">
                             <li>
                               <a
@@ -95,13 +95,13 @@ const Navbar = () => {
                           </ul>
                         </li>
                         <li>
-                          <Link to={"/about"}>About</Link>
+                          <Link to={"/about"} className={`nav-item nav-link ${location.pathname==="/about" ? "active":" "}`}>About</Link>
                         </li>
                         <li className="menu-item has-sub">
-                          <Link to={"/shop"}>Shop</Link>
+                          <Link to={"/shop"} className={`nav-item nav-link ${location.pathname==="/shop" ? "active":" "}`}>Shop</Link>
                         </li>
                         <li>
-                          <Link to={"/contact"}>Contact</Link>
+                          <Link to={"/contact"} className={`nav-item nav-link ${location.pathname==="/contact" ? "active":" "}`}>Contact</Link>
                         </li>
                       </ul>
                     </div>
