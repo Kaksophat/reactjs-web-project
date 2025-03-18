@@ -14,9 +14,9 @@ const Header = () => {
     <>
       <div className="sidebar pe-4 pb-3">
   <nav className="navbar bg-secondary navbar-dark">
-    <a href="index.html" className="navbar-brand mx-4 mb-3">
+    <Link to="/admin/dashboard" className="navbar-brand mx-4 mb-3">
       <h3 className="text-primary"><i className="fa fa-user-edit me-2" />DarkPan</h3>
-    </a>
+    </Link>
     <div className="d-flex align-items-center ms-4 mb-4">
       <div className="position-relative">
         <img className="rounded-circle" src="img/user.jpg" alt style={{width: 40, height: 40}} />
@@ -28,7 +28,7 @@ const Header = () => {
       </div>
     </div>
     <div className="navbar-nav w-100">
-      <Link to="/admin/dashboard" className={`nav-item nav-link ${location.pathname === "/admin/dashboard" ? "active" : ""}`}> {<BsClipboard2Fill className="me-2 fa"/>} Dashboard</Link>
+      <Link to="/admin/dashboard" className={`nav-item nav-link ${location.pathname==="/admin/dashboard" ? "active":" "}`}> {<BsClipboard2Fill className="me-2 fa"/>} Dashboard</Link>
       <div className="nav-item dropdown">
         <Link to="/admin/category" className={`nav-item nav-link ${location.pathname === "/admin/category" ? "active" : ""}`}> {<MdCategory style={{fontSize:'24px'}} />} Category </Link> 
       </div>

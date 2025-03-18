@@ -3,7 +3,7 @@
 const Contact = () => {
   return (
     <>
-         <section className="site-banner jarallax padding-large" style={{background: 'url(images/hero-image.jpg) no-repeat', backgroundPosition: 'top'}}>
+         <section className="site-banner jarallax padding-large" style={{background: 'url(images/hero-image.jpg) no-repeat', backgroundPosition: 'top',marginTop:'200px'}}>
   <div className="container">
     <div className="row">
       <div className="col-md-12">

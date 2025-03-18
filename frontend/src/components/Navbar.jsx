@@ -1,26 +1,39 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ShopContext } from "./context/Shopcontext";
 
 const Navbar = () => {
   const { getqty } = useContext(ShopContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const location = useLocation;
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   return (
     <>
-      <header id="header" style={{ marginTop: "10px" }}>
-        <div id="header-wrap">
-          <nav className="secondary-nav border-bottom">
+      <header
+        id="header"
+        className="fixed-top "
+        style={{
+          zIndex: 1000,
+          top: 0,
+          position: "fixed",
+          width: "100%",
+          left: 0,
+          boxSizing: "border-box",
+          backgroundColor: "white",
+        }}>
+        <div id="header-wrap ">
+          <nav className="secondary-nav border-bottom ">
             <div className="container">
               <div className="row d-flex align-items-center">
-                <div className="col-md-4 header-contact">
-                  <p>
+                <div className="col-md-4 header-contact " style={{paddingTop:"30px"}}>
+                <div className=" shipping-purchase text-center" style={{paddingBottom:'30px'}}>
+                <p >
                     Lets talk! <strong>+57 444 11 00 35</strong>
                   </p>
+                </div>
                 </div>
                 <div className="col-md-4 shipping-purchase text-center">
                   <p>Free shipping on a purchase value of $200</p>
@@ -77,7 +90,13 @@ const Navbar = () => {
                       }`}>
                       <ul className="menu-list">
                         <li className="menu-item has-sub">
-                          <Link to={"/"}>Home</Link>
+                          <Link
+                            to={"/"}
+                            className={`nav-item nav-link ${
+                              location.pathname === "/" ? "active " : " "
+                            }`}>
+                            Home
+                          </Link>
                           <ul className="submenu">
                             <li>
                               <a
@@ -95,13 +114,31 @@ const Navbar = () => {
                           </ul>
                         </li>
                         <li>
-                          <Link to={"/about"}>About</Link>
+                          <Link
+                            to={"/about"}
+                            className={`nav-item nav-link ${
+                              location.pathname === "/about" ? "active" : " "
+                            }`}>
+                            About
+                          </Link>
                         </li>
                         <li className="menu-item has-sub">
-                          <Link to={"/shop"}>Shop</Link>
+                          <Link
+                            to={"/shop"}
+                            className={`nav-item nav-link ${
+                              location.pathname === "/shop" ? "active" : " "
+                            }`}>
+                            Shop
+                          </Link>
                         </li>
                         <li>
-                          <Link to={"/contact"}>Contact</Link>
+                          <Link
+                            to={"/contact"}
+                            className={`nav-item nav-link ${
+                              location.pathname === "/contact" ? "active" : " "
+                            }`}>
+                            Contact
+                          </Link>
                         </li>
                       </ul>
                     </div>
