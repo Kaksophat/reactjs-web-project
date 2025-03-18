@@ -17,9 +17,11 @@ const Adminroute = () => {
         <Routes>
         <Route index element={<Navigate to="dashboard" />} />
           <Route path="dashboard" element={
+
             <Authrequird>
             <AdminDashboard/>
             </Authrequird>
+
             } />
           <Route path="product" element={<Adminproduct />} />
           <Route path="product/:id" element={<Adminproduct />} />
