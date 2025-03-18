@@ -6,6 +6,7 @@ import Footer from './Footer';
 import Shop from './Shop'
 import Displayproduct from './Displayproduct';
 import Cart from './Cart';
+import About from './About';
 
 const Customeroute = () => {
   return (
@@ -19,7 +20,7 @@ const Customeroute = () => {
         <Route path='/shop' element={<Shop/>}/>
         <Route path='/shop/:productid' element={<Displayproduct/>}/>
         <Route path='/cart' element={<Cart/>}/>
-
+          <Route path='/about' element={<About/>}/>
        </Routes>
        <div>
        <Footer />

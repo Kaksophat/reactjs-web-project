@@ -3,7 +3,7 @@
 const About = () => {
   return (
     <>
-       <section className="site-banner jarallax min-height300 padding-large" style={{background: 'url(images/hero-image.jpg) no-repeat'}}>
+       <section className="site-banner jarallax min-height300 padding-large" style={{background: 'url(images/hero-image.jpg) no-repeat',marginTop:'200px'}}>
   <div className="container">
     <div className="row">
       <div className="col-md-12">
