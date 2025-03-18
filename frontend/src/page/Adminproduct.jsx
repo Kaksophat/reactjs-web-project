@@ -1,9 +1,11 @@
 
 import { useContext,  useState } from "react";
 import { ShopContext } from "../components/context/Shopcontext";
-import {Link,useParams} from "react-router-dom"
+import {Link,useParams,useNavigate} from "react-router-dom"
+import { Authcontext } from "../components/context/Authcontact";
 
 const Adminproduct = () => {
+  const   navigator = useNavigate();
   const param = useParams();
   const [list, setlist] = useState("list");
   const [formdata, setformdata] = useState({
@@ -16,6 +18,7 @@ const Adminproduct = () => {
     description: "",
     image: "",
   });
+  const {user} = useContext(Authcontext)
   const { category, brand,api,all_product } = useContext(ShopContext);
 
   const handlechange = (e) => {
@@ -80,17 +83,22 @@ const Adminproduct = () => {
 
   const deleteproduct = async ()=>{
     try {
-    const respone =  await fetch(`${api}products/${param.id}`,{
+    const respone =  await fetch(`${api}product/${param.id}`,{
 
         method:'DELETE',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
+           "Authorization": `Bearer ${user.token}`
         }
       })
       const data = await respone.json()
       if(data.status == 200){
-        navigator("/admin/product")
+        const updatedProducts = all_product.filter(product => product.id !== param.id);
+        all_product.push(...updatedProducts); 
+        
+        setlist("list"); 
+        navigator("/admin/product");
       }
     } catch (error) {
       console.error("Error adding product", error);

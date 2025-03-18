@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
-import { createContext, useState ,useEffect} from "react";
+import { createContext, useState ,useEffect, useContext} from "react";
+import { Authcontext } from "./Authcontact";
 
 
 export const  ShopContext= createContext(null)
@@ -16,13 +17,30 @@ const ShopContextprovider= (props)=>{
     const [all_product,setproduct] = useState([])
     const [category,setcategory] = useState([])
     const [brand,setbrand] = useState([])
+    const {user} = useContext(Authcontext)
+    
 
+    const getproduct = async()=>{
+        const respones = await fetch(`${api}product`,{
+            method:"GET",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${user.token}`
+            }
+            
+        })
 
+        const data = await respones.json();
+
+        if(data.status == 200){
+            setproduct(data.products)
+        }
+    }
+    
     useEffect(()=>{
-     fetch(`${api}products`)
-     .then(res=>res.json())
-     .then(json=>{setproduct(json.products);
-
+        getproduct();
+    
     fetch(`${api}categories`)
     .then(res=>res.json())
     .then(json=>{setcategory(json.category);})
@@ -30,7 +48,7 @@ const ShopContextprovider= (props)=>{
     fetch(`${api}brands`)
     .then(res=>res.json())
     .then(json=>{setbrand(json.brand);})
-     })
+     
 
 
     },[])
@@ -77,16 +95,16 @@ const ShopContextprovider= (props)=>{
         setcartiems((prev)=>({...prev,[itemid]:prev[itemid]-1}))
     };
     
-    // const gettotalcart = () => {
-    //     const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
-    //     return storedCart.reduce((total, item) => {
-    //         const itemInfo = all_product.find(product => product.id === item.id);
-    //         return itemInfo ? total + itemInfo.price * item.quantity : total;
-    //     }, 0);
-    // };
+    const gettotalcart = () => {
+        const storedCart = JSON.parse(localStorage.getItem('carts')) || [];
+        return storedCart.reduce((total, item) => {
+            const itemInfo = all_product.find(product => product.id === item.id);
+            return itemInfo ? total + itemInfo.price * item.quantity : total;
+        }, 0);
+    };
 
     const  gettotalcartitem = () => {
-        const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+        const storedCart = JSON.parse(localStorage.getItem('carts')) || [];
         console.log(storedCart);
         return storedCart.reduce((total, item) => total + item.quantity, 0);
         
@@ -110,7 +128,7 @@ const ShopContextprovider= (props)=>{
       };
 
 
-    const Contextvalue = {all_product, cartitems, addtocart, removecart , gettotalcartitem,getqty,category,brand,api,updateProductList};
+    const Contextvalue = {all_product, gettotalcart,cartitems, addtocart, removecart , gettotalcartitem,getqty,category,brand,api,updateProductList};
      
     return (
         <ShopContext.Provider value={Contextvalue}>     

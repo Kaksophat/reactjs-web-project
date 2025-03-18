@@ -4,10 +4,10 @@ import { Navigate } from "react-router-dom";
 
 export const Authrequird = ({children})=>{
     const {user} = useContext(Authcontext)
-    console.log(user);
+    console.log("user",user);
     
             if(!user){
-        return <Navigate to={'/admin'}/>
+        return <Navigate to={'/admin/login'}/>
             }
 
             return children

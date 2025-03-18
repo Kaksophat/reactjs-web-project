@@ -3,7 +3,12 @@ import { MdCategory } from "react-icons/md";
 import { TbBrand4Chan } from "react-icons/tb";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
+import { useContext } from "react";
+import { Authcontext } from "../../components/context/Authcontact";
 const Header = () => {
+  const {user} = useContext(Authcontext)
+  console.log("user",user.name);
+  
   const location=useLocation()
   return (
     <>
@@ -18,8 +23,8 @@ const Header = () => {
         <div className="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1" />
       </div>
       <div className="ms-3">
-        <h6 className="mb-0">Jhon Doe</h6>
-        <span>Admin</span>
+        <h6 className="mb-0">{user.name}</h6>
+        <span>{user.email}</span>
       </div>
     </div>
     <div className="navbar-nav w-100">
@@ -111,7 +116,7 @@ const Header = () => {
     <div className="nav-item dropdown">
       <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">
         <img className="rounded-circle me-lg-2" src="img/user.jpg" alt style={{width: 40, height: 40}} />
-        <span className="d-none d-lg-inline-flex">John Doe</span>
+        <span className="d-none d-lg-inline-flex">{user.name}</span>
       </a>
       <div className="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
         <a href="#" className="dropdown-item">My Profile</a>
