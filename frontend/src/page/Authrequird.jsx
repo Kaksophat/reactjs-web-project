@@ -7,7 +7,7 @@ export const Authrequird = ({children})=>{
     console.log(user);
     
             if(!user){
-        return <Navigate to={'/admin'}/>
+        return <Navigate to={'/admin/login'}/>
             }
 
             return children

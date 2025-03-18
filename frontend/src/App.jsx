@@ -6,6 +6,7 @@ import Customeroute from "./components/Customeroute";
 import Adminroute from "./page/include/Adminroute";
 import { useEffect } from "react";
 import Adminlogin from "./page/adminlogin";
+import {Authrequird} from "./page/Authrequird"
 
 const App = () => {
   const location = useLocation();
@@ -46,7 +47,11 @@ const App = () => {
 
         <Route path="/*" element={<Customeroute />} />
 
-        <Route path="/admin/*" element={<Adminroute />} />
+        <Route path="/admin/*" element={
+          <Authrequird>
+          <Adminroute />
+          </Authrequird>
+          } />
 
         {/* Default redirection or other routes */}
         <Route path="*" element={<Navigate to="/admin" />} />

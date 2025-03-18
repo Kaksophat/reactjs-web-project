@@ -14,7 +14,9 @@ const Adminroute = () => {
         </div>
         <Routes>
         <Route index element={<Navigate to="dashboard" />} />
-          <Route path="dashboard" element={<AdminDashboard/>} />
+          <Route path="dashboard" element={
+            <AdminDashboard/>
+            } />
           <Route path="product" element={<Adminproduct />} />
           <Route path="category" element={<Category/>}/>
           <Route path="brand" element={<Brand/>}/>
