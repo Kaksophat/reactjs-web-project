@@ -14,10 +14,22 @@ const ShopContextprovider= (props)=>{
     
     const [cartitems, setcartiems] = useState([]);
     const [all_product,setproduct] = useState([])
+    const [category,setcategory] = useState([])
+    const [brand,setbrand] = useState([])
+
+
     useEffect(()=>{
-     fetch('http://localhost:8000/api/products')
+     fetch(`${api}products`)
      .then(res=>res.json())
-     .then(json=>{setproduct(json.product);
+     .then(json=>{setproduct(json.products);
+
+    fetch(`${api}categories`)
+    .then(res=>res.json())
+    .then(json=>{setcategory(json.category);})
+
+    fetch(`${api}brands`)
+    .then(res=>res.json())
+    .then(json=>{setbrand(json.brand);})
      })
 
 
@@ -87,9 +99,18 @@ const ShopContextprovider= (props)=>{
         })
         return qty
     }
+    const api = "http://localhost:8000/api/";
+
+    const updateProductList = (updatedProduct) => {
+        setproduct((prevProducts) => 
+          prevProducts.map((product) => 
+            product.id === updatedProduct.id ? updatedProduct : product
+          )
+        );
+      };
 
 
-    const Contextvalue = {all_product, cartitems, addtocart, removecart , gettotalcartitem,getqty};
+    const Contextvalue = {all_product, cartitems, addtocart, removecart , gettotalcartitem,getqty,category,brand,api,updateProductList};
      
     return (
         <ShopContext.Provider value={Contextvalue}>     

@@ -1,3 +1,4 @@
+
 import { Routes, Route, Navigate } from "react-router-dom";
 import Header from "./header";
 import AdminDashboard from "../AdminDashboard";
@@ -6,7 +7,7 @@ import Category from "../Category";
 import Brand from "../Brand";
 const Adminroute = () => {
   return (
-    <>
+    <div>
       <div className="content">
         <div>
           <Header/>
@@ -18,8 +19,11 @@ const Adminroute = () => {
           <Route path="category" element={<Category/>}/>
           <Route path="brand" element={<Brand/>}/>
         </Routes>
-      </div>
-    </>
+      
+      
+    </div>
+    </div>
+  
   );
 };
 
