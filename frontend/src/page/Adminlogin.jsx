@@ -21,6 +21,7 @@ const Adminlogin = () => {
       [e.target.id]: e.target.value,
     });
   };
+console.log(formdata);
 
   const adminlogin = async (e) => {
     e.preventDefault(); // Prevent default form submission
@@ -36,6 +37,8 @@ const Adminlogin = () => {
       });
 
       const data = await response.json();
+      console.log("user",data);
+      
 
       if (data.status === 200) {
         const admininfo = {

@@ -21,7 +21,7 @@ Route::get("/brands",[brandcontroller::class,"index"]);
 
 
 
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('login', [AuthController::class, 'login']);
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post("/category",[categorycontroller::class,"stor"]);
     Route::get("/category",[categorycontroller::class,"index"]);
