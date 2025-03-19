@@ -6,7 +6,10 @@ import Customeroute from "./components/Customeroute";
 import Adminroute from "./page/include/Adminroute";
 import { useEffect } from "react";
 import Adminlogin from "./page/adminlogin";
-import {Authrequird} from "./page/Authrequird"
+
+
+import { Authrequird } from "./page/Authrequird";
+
 
 const App = () => {
   const location = useLocation();

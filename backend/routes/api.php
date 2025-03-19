@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post("/brand",[brandcontroller::class,"stor"]);
     Route::get("/brand",[brandcontroller::class,"index"]);
     Route::put("/brand/{id}",[brandcontroller::class,"update"]);
+    Route::get("/brand/{id}",[brandcontroller::class,"show"]);
     Route::delete("/brand/{id}",[brandcontroller::class,"delete"]);
     Route::put("/category/{id}",[categorycontroller::class,"update"]);
     Route::delete("/category/{id}",[categorycontroller::class,"delete"]);
