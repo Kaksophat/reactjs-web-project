@@ -28,6 +28,7 @@ const Adminroute = () => {
           <Route path="product/edit/:id" element={<Admineditproduct />} />
           <Route path="category" element={<Category/>}/>
           <Route path="brand" element={<Brand/>}/>
+          <Route path="brand/edit/:id" element={<Brand/>}/>
         </Routes>
       
       

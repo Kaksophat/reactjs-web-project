@@ -16,7 +16,6 @@ const ShopContextprovider= (props)=>{
     const [cartitems, setcartiems] = useState([]);
     const [all_product,setproduct] = useState([])
     const [category,setcategory] = useState([])
-    const [brand,setbrand] = useState([])
     const {user} = useContext(Authcontext)
     
 
@@ -41,13 +40,11 @@ const ShopContextprovider= (props)=>{
     useEffect(()=>{
         getproduct();
     
-    fetch(`${api}categories`)
+    fetch(`${api}category`)
     .then(res=>res.json())
     .then(json=>{setcategory(json.category);})
 
-    fetch(`${api}brands`)
-    .then(res=>res.json())
-    .then(json=>{setbrand(json.brand);})
+  
      
 
 
@@ -128,7 +125,7 @@ const ShopContextprovider= (props)=>{
       };
 
 
-    const Contextvalue = {all_product, gettotalcart,cartitems, addtocart, removecart , gettotalcartitem,getqty,category,brand,api,updateProductList};
+    const Contextvalue = {all_product, gettotalcart,cartitems, addtocart, removecart , gettotalcartitem,getqty,category,api,updateProductList};
      
     return (
         <ShopContext.Provider value={Contextvalue}>     

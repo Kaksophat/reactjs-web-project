@@ -94,7 +94,7 @@ const Adminproduct = () => {
       })
       const data = await respone.json()
       if(data.status == 200){
-        const updatedProducts = all_product.filter(product => product.id !== param.id);
+        const updatedProducts = all_product;
         all_product.push(...updatedProducts); 
         
         setlist("list"); 
