@@ -64,4 +64,19 @@ class categorycontroller extends Controller
             "message" =>  "Delete success"
         ]);
     }
+    public function show($id ,Request $request){
+        $category=category::find($id);
+
+        if(!$category){
+            return response()->json([
+                "status" => 404,
+            "message" =>  "categories not found"
+            ]);
+        }
+       
+        return response()->json([
+            "status" => 200,
+            "category" =>  $category
+        ]);
+    }
 }

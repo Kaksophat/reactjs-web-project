@@ -29,6 +29,7 @@ const Adminroute = () => {
           <Route path="category" element={<Category/>}/>
           <Route path="brand" element={<Brand/>}/>
           <Route path="brand/edit/:id" element={<Brand/>}/>
+          <Route path="category/edit/:id" element={<Category/>}/>
         </Routes>
       
       
