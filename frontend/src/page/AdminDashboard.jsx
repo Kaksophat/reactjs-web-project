@@ -200,7 +200,7 @@ const AdminDashboard = () => {
                 <div className="d-flex align-items-center border-bottom py-3">
                   <img
                     className="rounded-circle flex-shrink-0"
-                    src="img/user.jpg"
+                    src="https://i.pinimg.com/736x/fb/e9/36/fbe936b6a763e889137730c0864563ac.jpg"
                     alt
                     style={{ width: 40, height: 40 }}
                   />
@@ -215,13 +215,13 @@ const AdminDashboard = () => {
                 <div className="d-flex align-items-center border-bottom py-3">
                   <img
                     className="rounded-circle flex-shrink-0"
-                    src="img/user.jpg"
+                    src="https://i.pinimg.com/736x/3b/fa/15/3bfa1556963ffea66c5a95422dede65f.jpg"
                     alt
                     style={{ width: 40, height: 40 }}
                   />
                   <div className="w-100 ms-3">
                     <div className="d-flex w-100 justify-content-between">
-                      <h6 className="mb-0">Jhon Doe</h6>
+                      <h6 className="mb-0">Michel</h6>
                       <small>15 minutes ago</small>
                     </div>
                     <span>Short message goes here...</span>
@@ -230,13 +230,13 @@ const AdminDashboard = () => {
                 <div className="d-flex align-items-center border-bottom py-3">
                   <img
                     className="rounded-circle flex-shrink-0"
-                    src="img/user.jpg"
+                    src="https://i.pinimg.com/736x/5b/d2/d4/5bd2d4e4748b8a651a6c27bfd0c5730c.jpg"
                     alt
                     style={{ width: 40, height: 40 }}
                   />
                   <div className="w-100 ms-3">
                     <div className="d-flex w-100 justify-content-between">
-                      <h6 className="mb-0">Jhon Doe</h6>
+                      <h6 className="mb-0">Harry Porter</h6>
                       <small>15 minutes ago</small>
                     </div>
                     <span>Short message goes here...</span>
@@ -245,13 +245,13 @@ const AdminDashboard = () => {
                 <div className="d-flex align-items-center pt-3">
                   <img
                     className="rounded-circle flex-shrink-0"
-                    src="img/user.jpg"
+                    src="https://i.pinimg.com/736x/04/2b/ab/042bab02ae09f8daaf2403483c6de265.jpg"
                     alt
                     style={{ width: 40, height: 40 }}
                   />
                   <div className="w-100 ms-3">
                     <div className="d-flex w-100 justify-content-between">
-                      <h6 className="mb-0">Jhon Doe</h6>
+                      <h6 className="mb-0">Sathy </h6>
                       <small>15 minutes ago</small>
                     </div>
                     <span>Short message goes here...</span>
