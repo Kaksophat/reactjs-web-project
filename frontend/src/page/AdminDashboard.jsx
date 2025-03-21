@@ -1,4 +1,9 @@
 import { FaDollarSign } from "react-icons/fa6";
+import { FaUser } from "react-icons/fa6";
+import { FiActivity } from "react-icons/fi";
+import { TbChartInfographic } from "react-icons/tb";
+import Dashimg from './include/Dashimg.gif'
+import Revengimg from './include/Animation.gif'
 const AdminDashboard = () => {
   return (
     <>
@@ -6,47 +11,56 @@ const AdminDashboard = () => {
         <div className="container-fluid pt-4 px-4">
           <div className="row g-4">
             <div className="col-sm-6 col-xl-3">
-              <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4 ">
+              <div className="bg-secondary rounded d-flex align-items-center p-4">
                 <i className="fa fa-chart-line fa-3x text-primary" />
                 <div className="ms-3">
                   <p className="mb-2" style={{textAlign:'start'}}>Today Sale</p>
                   <h6 className="mb-0">$1234</h6>
                 </div>
-                <div>
+                <div style={{marginLeft:'auto'}}>
                 <FaDollarSign style={{fontSize:'50'}} />
                 </div>
               </div>
             </div>
             <div className="col-sm-6 col-xl-3">
-              <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                <i className="fa fa-chart-bar fa-3x text-primary" />
+              <div className="bg-secondary rounded d-flex align-items-center p-4">
+                <i className="fa fa-chart-line fa-3x text-primary" />
                 <div className="ms-3">
-                  <p className="mb-2">Total Sale</p>
-                  <h6 className="mb-0">$1234</h6>
+                  <p className="mb-2" style={{textAlign:'start'}}>Today User</p>
+                  <h6 className="mb-0">1234</h6>
+                </div>
+                <div style={{marginLeft:'auto'}}>
+                <FaUser  style={{fontSize:'50'}} />
                 </div>
               </div>
             </div>
             <div className="col-sm-6 col-xl-3">
-              <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                <i className="fa fa-chart-area fa-3x text-primary" />
+              <div className="bg-secondary rounded d-flex align-items-center p-4">
+                <i className="fa fa-chart-line fa-3x text-primary" />
                 <div className="ms-3">
-                  <p className="mb-2">Today Revenue</p>
-                  <h6 className="mb-0">$1234</h6>
+                  <p className="mb-2" style={{textAlign:'start'}}>Today Profit</p>
+                  <h6 className="mb-0">1234</h6>
+                </div>
+                <div style={{marginLeft:'auto'}}>
+                <FiActivity  style={{fontSize:'50'}} />
                 </div>
               </div>
             </div>
             <div className="col-sm-6 col-xl-3">
-              <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                <i className="fa fa-chart-pie fa-3x text-primary" />
+              <div className="bg-secondary rounded d-flex align-items-center p-4">
+                <i className="fa fa-chart-line fa-3x text-primary" />
                 <div className="ms-3">
-                  <p className="mb-2">Total Revenue</p>
-                  <h6 className="mb-0">$1234</h6>
+                  <p className="mb-2" style={{textAlign:'start'}}>Today Revengnue</p>
+                  <h6 className="mb-0">1234</h6>
+                </div>
+                <div style={{marginLeft:'auto'}}>
+                <TbChartInfographic  style={{fontSize:'50'}} />
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="container-fluid pt-4 px-4">
+        <div className="container-fluid pt-4 px-4 justify-content-between">
           <div className="row g-4">
             <div className="col-sm-12 col-xl-6">
               <div className="bg-secondary text-center rounded p-4">
@@ -54,7 +68,10 @@ const AdminDashboard = () => {
                   <h6 className="mb-0">Worldwide Sales</h6>
                   <a href>Show All</a>
                 </div>
-                <canvas id="worldwide-sales"></canvas>
+                {/* <canvas id="worldwide-sales"></canvas> */}
+                <img src={Dashimg} alt="graph" style={{height:'100%'}} />
+                <img src={Dashimg} alt="graph" style={{height:'100%'}} />
+                <img src={Dashimg} alt="graph" style={{height:'100%'}} />
               </div>
             </div>
             <div className="col-sm-12 col-xl-6">
@@ -63,7 +80,9 @@ const AdminDashboard = () => {
                   <h6 className="mb-0">Salse &amp; Revenue</h6>
                   <a href>Show All</a>
                 </div>
-                <canvas id="salse-revenue"></canvas>
+                <img src={Revengimg} alt="graph" style={{height:'100%'}} />
+                <img src={Revengimg} alt="graph" style={{height:'100%'}} />
+                <img src={Revengimg} alt="graph" style={{height:'100%'}} />
               </div>
             </div>
           </div>
