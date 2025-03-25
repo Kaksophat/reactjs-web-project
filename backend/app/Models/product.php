@@ -12,4 +12,14 @@ class product extends Model
     {
         return asset('uploads/' . $this->image);
     }
+
+    public function category()
+    {
+        return $this->belongsTo(category::class);
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(brand::class);
+    }
 }

@@ -1,5 +1,5 @@
 
-import { useContext,  useState } from "react";
+import { useContext,  useEffect,  useState } from "react";
 import { ShopContext } from "../components/context/Shopcontext";
 import {Link,useParams,useNavigate} from "react-router-dom"
 import { Authcontext } from "../components/context/Authcontact";
@@ -8,6 +8,7 @@ const Adminproduct = () => {
   const   navigator = useNavigate();
   const param = useParams();
   const [list, setlist] = useState("list");
+  const [product,setproduct] = useState([])
   const [formdata, setformdata] = useState({
     title: "",
     category_id: "",
@@ -19,7 +20,7 @@ const Adminproduct = () => {
     image: "",
   });
   const {user} = useContext(Authcontext)
-  const { category, brand,api,all_product } = useContext(ShopContext);
+  const { category, brand,api } = useContext(ShopContext);
 
   const handlechange = (e) => {
     setformdata({
@@ -48,17 +49,21 @@ const Adminproduct = () => {
       formData.append("status", formdata.status);
       formData.append("description", formdata.description); 
       formData.append("image", formdata.image); 
-      console.log(formData);
+      console.log(formdata);
 
-      const response = await fetch(`${api}products`, {
+      const response = await fetch(`${api}product`, {
         method: "POST",
+        headers: {
+         
+           "Authorization": `Bearer ${user.token}`
+        },
         body: formData,
       });
 
       const json = await response.json();
 
       if (json.status === 201) {
-        all_product.push(json.product);
+       getproduct();
         setlist("list"); 
         setformdata({
           title: "",
@@ -94,8 +99,7 @@ const Adminproduct = () => {
       })
       const data = await respone.json()
       if(data.status == 200){
-        const updatedProducts = all_product;
-        all_product.push(...updatedProducts); 
+       getproduct();
         
         setlist("list"); 
         navigator("/admin/product");
@@ -105,6 +109,29 @@ const Adminproduct = () => {
         
     }
   }
+
+    const getproduct = async()=>{
+          const respones = await fetch(`${api}product`,{
+              method:"GET",
+              headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'application/json',
+                  "Authorization": `Bearer ${user.token}`
+              }
+              
+          })
+  
+          const data = await respones.json();
+  
+          if(data.status == 200){
+              setproduct(data.products)
+          }
+      }
+
+      useEffect(()=>{
+          getproduct()
+      },[user.token])
+      
 
   return (
     <>
@@ -144,7 +171,7 @@ const Adminproduct = () => {
                   </tr>
                 </thead>
                 <tbody className="text-white">
-                  {all_product.map((product) => (
+                  {product.map((product) => (
                     <tr key={product.id} className="text-center">
                       <td className="text-white">{product.id}</td>
                       <td className="text-white">{product.category_id}</td>

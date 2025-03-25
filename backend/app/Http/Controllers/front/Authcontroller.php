@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\front;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
-class AuthController extends Controller
+class Authcontroller extends Controller
 {
     public function register(Request $request)
     {
@@ -20,42 +20,46 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
-        $user = User::create([
+        $user = customer::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
-        // $token = JWTAuth::fromUser($user);
-
+        $token = JWTAuth::fromUser($user);
         return response()->json([
+            'status' => 200,
             'data' => $user,
+            'token' => $token
             ], 201);
     }
 
     public function login(Request $request)
     {
-        $credentials = $request->only(['email', 'password']);
+        $credentials = $request->only('email', 'password');
 
-        if (!$token = Auth::guard('api')->attempt($credentials)) {
+        if (!$token = Auth::guard('customer')->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
         return response()->json([
-            "data" => Auth::guard('api')->user(),
-            "token" => $token
-        ]);
+            'status' => 200,
+            'data' => Auth::guard('customer')->user(),
+            'token' => $token
+    ]);
     }
 
     public function logout()
     {
-        Auth::guard('api')->logout();
+        Auth::guard('customer')->logout();
 
         return response()->json(['message' => 'Successfully logged out']);
     }
 
     public function me()
     {
-        return response()->json(Auth::guard('api')->user());
+        return response()->json(Auth::guard('customer')->user());
     }
+
+    
 }

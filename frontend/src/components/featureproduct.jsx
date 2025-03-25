@@ -1,17 +1,18 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext,  useState } from "react"
 import { ShopContext } from "./context/Shopcontext";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Featureproduct = () => {
-    const [product,setproduct] = useState([])
-    const {  addtocart } = useContext(ShopContext);
-    useEffect(()=>{
-        fetch('http://localhost:8000/api/products')
-        .then(res=>res.json())
-        .then(json=>{setproduct(json.products),console.log("data",json.product)})
-    },[])
+    const {  addtocart,all_product } = useContext(ShopContext);
+    const handleAddToCart = (item) => {
+       addtocart(item);
+       toast.success("Added to cart successfully!");
+     };
   return (
     <>
+    <ToastContainer/>
        <section id="featured-products" className="product-store padding-large">
   <div className="container">
     <div className="section-header d-flex flex-wrap align-items-center justify-content-between">
@@ -22,7 +23,7 @@ const Featureproduct = () => {
     </div>
     <div className="swiper product-swiper overflow-hidden">
       <div className="swiper-wrapper" style={{height:"100%",width:"100%"}}>
-        {product.map((product)=>(
+        {all_product.map((product)=>(
         <div className="swiper-slide" style={{width:"350px",marginLeft:"10px",height:"600px"}} key={product.id}>
           <div className="product-item">
             <div className="image-holder">
@@ -31,7 +32,7 @@ const Featureproduct = () => {
             </div>
             <div className="cart-concern">
               <div className="cart-button d-flex justify-content-between align-items-center">
-                <button type="button" className="btn-wrap cart-link d-flex align-items-center"  onClick={()=> addtocart(product.id)}>add to cart <i className="icon icon-arrow-io" />
+                <button type="button" className="btn-wrap cart-link d-flex align-items-center"  onClick={()=> handleAddToCart(product)}>add to cart <i className="icon icon-arrow-io" />
                 </button>
                 <button type="button" className="view-btn tooltip
                   d-flex">

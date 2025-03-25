@@ -8,6 +8,11 @@ import Displayproduct from './Displayproduct';
 import Cart from './Cart';
 import Checkout from './checkout';
 import About from './About';
+import Login from './Login';
+import MyAccount from './Myaccount';
+import { Customerrequird } from './Customerrequird';
+import MyAccountroute from './MyAccountroute';
+import Comfirmorder from './Comfirmorder';
 
 const Customeroute = () => {
   return (
@@ -21,9 +26,31 @@ const Customeroute = () => {
         <Route path='/shop' element={<Shop/>}/>
         <Route path='/shop/:productid' element={<Displayproduct/>}/>
         <Route path='/cart' element={<Cart/>}/>
-        <Route path='/checkout' element={<Checkout/>} />
+        <Route path='/checkout' element={
+          <Customerrequird>
+          <Checkout/>
+          </Customerrequird>
+          } />
+           <Route path='/comfirmorder/:id' element={
+          <Customerrequird>
+          <Comfirmorder/>
+          </Customerrequird>
+          } />
 
           <Route path='/about' element={<About/>}/>
+          <Route path='/login' element={<Login/>}/>
+          
+        
+      <Route 
+          path='/myaccount/*' 
+          element={
+            <Customerrequird>
+              <MyAccountroute/>
+            </Customerrequird>
+          }
+        />
+          
+        
        </Routes>
        <div>
        <Footer />

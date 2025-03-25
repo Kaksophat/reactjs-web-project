@@ -12,13 +12,33 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $products = product::all();
-
+        $category = product::with('category')->get();
+        $brand = product::with('brand')->get();
         return response()->json([
             "status" => 200,
             "products" =>  $products,
+            "category" => $category,
+            "brand" => $brand
         ]);
     }
-
+   
+    public function getproduct(Request $request)
+    {
+        $products = Product::whereHas('category', function($query) {
+            $query->where('status', '!=', 0); 
+        })->where('status', '!=', 0)->where("quantity", '!=',0)->get();
+    
+        $category = Product::with('category')->get();
+        $brand = Product::with('brand')->get();
+    
+        return response()->json([
+            "status" => 200,
+            "products" => $products,  
+            "category" => $category,
+            "brand" => $brand
+        ]);
+    }
+    
     public function store (Request $request)
     {
         $vailadator = Validator::make($request->all(), [
@@ -91,7 +111,6 @@ class ProductController extends Controller
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('/uploads'), $imageName);
     
-            // Delete old image if it exists
             if ($product->image && file_exists(public_path('/uploads' . $product->image))) {
                 unlink(public_path('/uploads' . $product->image));
             }

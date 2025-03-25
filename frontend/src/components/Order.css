@@ -1,0 +1,27 @@
+/* Order.css */
+.table-custom {
+    width: 100%;
+    border-collapse: collapse; 
+  }
+  
+  .table-custom th,
+  .table-custom td {
+    border: 1px solid #ddd;
+    padding: 8px; 
+    text-align: left; 
+  }
+  
+  .table-custom th {
+    color: black;
+    text-align: center;
+  }
+  
+  .table-custom tbody tr:nth-child(even) {
+    background-color: #f2f2f2; 
+    width: 100%;
+    color: black;
+  }
+  .table-custom tbody{
+    width: 100%;
+    text-align: center;
+  }
