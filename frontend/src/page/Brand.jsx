@@ -1,7 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { ShopContext } from "../components/context/Shopcontext";
 import { Authcontext } from "../components/context/Authcontact";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Brand() {
   const param = useParams();
@@ -32,6 +34,7 @@ export default function Brand() {
       const data = await response.json();
       if (data.status === 201) {
         setlist("list");
+        toast.success("Add Brand success")
         brand();
       }
     } catch (error) {
@@ -126,6 +129,8 @@ export default function Brand() {
 
   return (
     <div className="container-fluid pt-4 px-4">
+    <ToastContainer/>
+
       <div className="bg-secondary text-center rounded p-4">
         {list === "list" && (
           <div>
@@ -215,7 +220,7 @@ export default function Brand() {
             
               {param.id ? "Update Brand" : "Add Brand"}
             </button>
-            <button
+           <Link to={"/admin/brand"}><button
               type="button"
               style={{
                 color: "white",
@@ -224,11 +229,12 @@ export default function Brand() {
                 borderRadius: "7px",
                 marginLeft: "10px",
               }}
-              onClick={() => setlist("list")}
+              onClick={() => { setformdata({ name: "", status: "" }); setlist("list"); }}
               className=" mt-3 "
             >
               Back
             </button>
+            </Link> 
           </form>
         )}
       </div>

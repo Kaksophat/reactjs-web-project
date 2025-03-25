@@ -10,15 +10,20 @@ const Displayproduct = () => {
     const product = all_product.find((e) => e.id === Number(productid));
     const [images, setImages] = useState([]);
     const [selectedImage, setSelectedImage] = useState(null);
+    const {api} = useContext(ShopContext);
     
     useEffect(() => {
         const fetchProductImages = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/api/productimages/${productid}`);
+                const response = await fetch(`${api}products/${productid}`);
                 const data = await response.json();
-                if (data.productimage && data.productimage.length > 0) {
-                    setImages(data.productimage);
-                    setSelectedImage(data.productimage[0].image_url);
+                console.log(data);
+                
+                if (data.status === 200) {
+                    setImages(data.product);
+                    console.log(data.product);
+                    
+                    // setSelectedImage(data.product[0].image_url);
                 }
             } catch (error) {
                 console.error("Error fetching product images:", error);
@@ -28,18 +33,18 @@ const Displayproduct = () => {
     }, [productid]);
     
     return (
-        <div className="displayproduct">
+        <div className="displayproduct" style={{ marginTop: "200px" }}>
             <div className="displayproduct-left">
                 <div className="displayproduct-img-list">
-                    {images.map((img, index) => (
+                    {/* {images.map((img) => (
                         <img 
-                            key={index}
+                            key={img.id}
                             src={img.image_url} 
-                            alt={`Product image ${index + 1}`} 
                             onClick={() => setSelectedImage(img.image_url)} 
                             style={{ cursor: "pointer", margin: "5px", border: selectedImage === img.image_url ? "1px solid black" : "none" }}
                         />
-                    ))}
+                    ))} */}
+                    <img src={product.image_url} alt="" />
                 </div>
                 <div className="displayproduct-img">
                     {selectedImage && (

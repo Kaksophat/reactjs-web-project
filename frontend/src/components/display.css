@@ -7,6 +7,9 @@
     display: flex;
     gap: 17px;
   }
+  li .color{
+    color: black;
+  }
   .displayproduct-img-list {
     display: flex;
     flex-direction: column;
