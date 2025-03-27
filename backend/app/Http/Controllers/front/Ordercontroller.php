@@ -78,6 +78,16 @@ class Ordercontroller extends Controller
             "order" => $order
         ]);
     }
+
+    public function getorder(Request $request)
+    {
+        $order = orders::Orderby('id','desc')->limit(5)->get();
+
+        return response()->json([
+            "status" => 200,
+            "order" => $order
+        ]);
+    }
     public function show($id,Request $request)  {
         $order = orders::with("items","items.product")->find($id);
         return response()->json([

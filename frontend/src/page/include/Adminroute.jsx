@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Header from "./header";
 import AdminDashboard from "../AdminDashboard";
 import Adminproduct from "../Adminproduct";
-import Admineditproduct from "../Admineditproduct";
+// import Admineditproduct from "../Admineditproduct";
 import Category from "../Category";
 import Brand from "../Brand";
 import { Authrequird } from "../Authrequird";
@@ -24,8 +24,8 @@ const Adminroute = () => {
 
             } />
           <Route path="product" element={<Adminproduct />} />
-          <Route path="product/:id" element={<Adminproduct />} />
-          <Route path="product/edit/:id" element={<Admineditproduct />} />
+          {/* <Route path="product/:id" element={<Adminproduct />} /> */}
+          <Route path="product/edit/:id" element={<Adminproduct />} />
           <Route path="category" element={<Category/>}/>
           <Route path="brand" element={<Brand/>}/>
           <Route path="brand/edit/:id" element={<Brand/>}/>

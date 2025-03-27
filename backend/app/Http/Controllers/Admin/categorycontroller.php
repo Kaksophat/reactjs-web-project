@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class categorycontroller extends Controller
 {
     public function index (Request $request){
-        $category = category::orderBy("created_at","asc")->get();
+        $category=category::with("brands")->get();
         
 
         return response()->json([
@@ -65,7 +65,8 @@ class categorycontroller extends Controller
         ]);
     }
     public function show($id ,Request $request){
-        $category=category::find($id);
+        $category=category::with("brands")->find($id);
+
 
         if(!$category){
             return response()->json([

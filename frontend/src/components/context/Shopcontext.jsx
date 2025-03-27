@@ -8,6 +8,9 @@ const ShopContextprovider = (props) => {
     const [cartitems, setcartiems] = useState([]);
     const [all_product, setproduct] = useState([]);
     const [category, setcategory] = useState([]);
+    const [setting, setsetting] = useState({});
+
+
     const [brand, setbrand] = useState([]);
     const { customer,user} = useContext(Authcontext);
     const api = "http://localhost:8000/api/";
@@ -75,7 +78,25 @@ const ShopContextprovider = (props) => {
         })
         .then(res => res.json())
         .then(json => { setbrand(json.brand); console.log(json.brand); });
+
+       
     }, [user]);
+
+    useEffect(()=>
+    {
+        fetch(`${api}setting/2`, {
+            method: "GET",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            }
+        }
+        ).then(res => res.json())
+        .then(json =>  setsetting(json.setting) 
+        );
+    },[]
+    )
+
 
     const addtocart = (product) => {
         if (!product || !product.id) return; // Safeguard to ensure product is valid
@@ -158,7 +179,8 @@ const ShopContextprovider = (props) => {
         subtotal,
         grandtotal,
         clearCart,
-        all_product
+        all_product,
+        setting
     };
      
     return (

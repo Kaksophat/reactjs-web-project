@@ -6,7 +6,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { Authcontext } from "../../components/context/Authcontact";
 const Header = () => {
-  const {user} = useContext(Authcontext)
+  const {user,logout} = useContext(Authcontext)
   console.log("user",user.name);
   
   const location=useLocation()
@@ -34,6 +34,8 @@ const Header = () => {
       </div>
       <Link to="/admin/brand" className={`nav-item nav-link ${location.pathname === "/admin/brand" ? "active" : ""}`}>{<TbBrand4Chan style={{fontSize:'24px'}}/>} Brand </Link>
       <Link to="/admin/product" className={`nav-item nav-link ${location.pathname === "/admin/product" ? "active" : ""}`}>{<MdOutlineProductionQuantityLimits style={{fontSize:'24px'}} />}Product</Link>
+      <button className={`nav-item nav-link `} onClick={()=>logout()}>{<MdOutlineProductionQuantityLimits style={{fontSize:'24px'}} />}Logout</button>
+
     
     </div>
   </nav>
