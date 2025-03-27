@@ -41,8 +41,11 @@ const Shop = () => {
     addtocart(item);
     toast.success("Added to cart successfully!");
   };
+ 
+  
 
   const getProducts = async () => {
+ 
     try {
       const response = await fetch(`${api}customer/products`, {
         method: "GET",
@@ -51,7 +54,6 @@ const Shop = () => {
           "Content-Type": "application/json",
         },
       });
-
       const data = await response.json();
 
       if (data.status === 200) {
@@ -232,15 +234,15 @@ const Shop = () => {
                       All
                     </li>
                     {brandList.map((brand) => (
-                      <li
-                        key={brand.id}
-                        onClick={() => handleBrandClick(brand.id)}
-                        className={`tags-item ${selectedBrand === brand.id ? "active" : ""}`}
-                      style={{ color: selectedBrand === brand.id ? "blue" : "black" }}
-                      >
-                        {brand.name}
-                      </li>
-                    ))}
+      <li
+        key={brand.id}
+        onClick={() => handleBrandClick(brand.id)}
+        className={`tags-item ${selectedBrand === brand.id ? "active" : ""}`}
+        style={{ color: selectedBrand === brand.id ? "blue" : "black" }}
+      >
+        {brand.name}
+      </li>
+    ))}
                   </ul>
                 </div>
 

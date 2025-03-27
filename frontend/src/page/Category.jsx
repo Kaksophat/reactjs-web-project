@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { ShopContext } from '../components/context/Shopcontext'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Authcontext } from '../components/context/Authcontact';
@@ -16,6 +16,8 @@ export default function Category() {
 
   const { user } = useContext(Authcontext);
   const { api } = useContext(ShopContext);
+  console.log(user.token);
+  
 
   const addbrand = async (e) => {
     e.preventDefault();
@@ -24,6 +26,7 @@ export default function Category() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
           Authorization: `Bearer ${user.token}`,
         },
         body: JSON.stringify(formdata),
@@ -46,6 +49,7 @@ export default function Category() {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
           Authorization: `Bearer ${user.token}`,
         },
         body: JSON.stringify(formdata),
@@ -68,6 +72,7 @@ export default function Category() {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
           Authorization: `Bearer ${user.token}`,
         },
       });
@@ -88,6 +93,7 @@ export default function Category() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
           Authorization: `Bearer ${user.token}`,
         },
       });
@@ -107,6 +113,7 @@ export default function Category() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
           Authorization: `Bearer ${user.token}`,
         },
       });

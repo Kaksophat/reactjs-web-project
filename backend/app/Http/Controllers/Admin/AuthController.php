@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\customer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,19 +34,23 @@ class AuthController extends Controller
             ], 201);
     }
 
-    public function login(Request $request)
-    {
-        $credentials = $request->only(['email', 'password']);
-
-        if (!$token = Auth::guard('api')->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+    
+        public function login(Request $request)
+        {
+            $credentials = $request->only(['email', 'password']);
+        
+            if (!$token = JWTAuth::attempt($credentials)) {
+                return response()->json(['error' => 'Unauthorized'], 401);
+            }
+        
+            return response()->json([
+                "status" => 200,
+                "data" => Auth::user(),
+                "token" => $token 
+            ]);
         }
-
-        return response()->json([
-            "data" => Auth::guard('api')->user(),
-            "token" => $token
-        ]);
-    }
+        
+    
 
     public function logout()
     {
@@ -58,4 +63,6 @@ class AuthController extends Controller
     {
         return response()->json(Auth::guard('api')->user());
     }
+
+   
 }

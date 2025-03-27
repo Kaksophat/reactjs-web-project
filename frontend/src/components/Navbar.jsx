@@ -4,13 +4,15 @@ import { ShopContext } from "./context/Shopcontext";
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { Authcontext } from "./context/Authcontact";
+// import logo from "../../public/images/main-logo.png"
 
 const Navbar = () => {
-  const { getqty } = useContext(ShopContext);
+  const { getqty ,setting} = useContext(ShopContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   const location = useLocation();
   const {customer} = useContext(Authcontext);
+console.log("image",setting.email);
 
 
   const toggleMenu = () => {
@@ -144,7 +146,7 @@ const Navbar = () => {
               <div className="row d-flex align-items-center">
                 <div className="col-lg-2 col-md-2">
                   <div className="main-logo">
-                    <Link to={"/"}>Ultras</Link>
+                    <Link to={"/"}>  <img src={setting?.image_url} alt="" /> </Link>
                   </div>
                 </div>
                 <div className="col-lg-10 col-md-10">

@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\product;
+use Faker\Core\File as CoreFile;
+use Illuminate\Http\File as HttpFile;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File as FacadesFile;
+use Laravel\Pail\File;
 
 class ProductController extends Controller
 {
@@ -26,7 +30,9 @@ class ProductController extends Controller
     {
         $products = Product::whereHas('category', function($query) {
             $query->where('status', '!=', 0); 
-        })->where('status', '!=', 0)->where("quantity", '!=',0)->get();
+        })->where('status', '!=', 0)->where("quantity", '!=',0)->wherehas('brand',function($query){
+            $query->where('status', '!=',0);
+        })->get();
     
         $category = Product::with('category')->get();
         $brand = Product::with('brand')->get();
@@ -38,6 +44,22 @@ class ProductController extends Controller
             "brand" => $brand
         ]);
     }
+    public function bestSellingProducts()
+{
+    $bestSellingProducts = Product::select('products.*')
+        ->join('orderitems', 'products.id', '=', 'orderitems.product_id')
+        ->selectRaw('SUM(orderitems.quantity) as total_sold')
+        ->groupBy('products.id')
+        ->orderByDesc('total_sold')
+        ->take(4) 
+        ->get();
+
+    return response()->json([
+        "status" => 200,
+        "best_selling_products" => $bestSellingProducts
+    ]);
+}
+
     
     public function store (Request $request)
     {
@@ -112,7 +134,7 @@ class ProductController extends Controller
             $image->move(public_path('/uploads'), $imageName);
     
             if ($product->image && file_exists(public_path('/uploads' . $product->image))) {
-                unlink(public_path('/uploads' . $product->image));
+                FacadesFile::delete(public_path('/uploads' . $product->image));
             }
     
             $product->image = $imageName;
@@ -145,6 +167,7 @@ class ProductController extends Controller
         };
 
         $product->delete();
+        FacadesFile::delete(public_path('/uploads' . $product->image));
 
         return response()->json([
             "status" => 200,

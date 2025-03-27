@@ -38,14 +38,11 @@ console.log(formdata);
       });
 
       const data = await response.json();
-      console.log("user",data);
       
 
       if (data.status === 200) {
        
-      
-     
-        const customerinfo = {
+        const admininfo = {
           token: data.token,
           name: data.data.name,
           email: data.data.email,
@@ -54,7 +51,7 @@ console.log(formdata);
         
 
 
-        login(customerinfo);
+        login(admininfo);
         console.log(data.token);
         
         navigate("/admin/dashboard");

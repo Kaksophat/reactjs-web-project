@@ -26,7 +26,8 @@ export default function Brand() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
+          "Accept": "application/json",
+          "Authorization": `Bearer ${user.token}`,
         },
         body: JSON.stringify(formdata),
       });
@@ -49,7 +50,8 @@ export default function Brand() {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
+          "Accept": "application/json",
+          "Authorization": `Bearer ${user.token}`,
         },
         body: JSON.stringify(formdata),
       });
@@ -71,6 +73,7 @@ export default function Brand() {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
           Authorization: `Bearer ${user.token}`,
         },
       });
@@ -91,6 +94,7 @@ export default function Brand() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
           Authorization: `Bearer ${user.token}`,
         },
       });
@@ -110,6 +114,7 @@ export default function Brand() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
           Authorization: `Bearer ${user.token}`,
         },
       });
