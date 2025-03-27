@@ -4,13 +4,9 @@ import { FiActivity } from "react-icons/fi";
 import { TbChartInfographic } from "react-icons/tb";
 import Dashimg from './include/Dashimg.gif'
 import Revengimg from './include/Animation.gif'
-<<<<<<< HEAD
-
-=======
 import { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../components/context/Shopcontext";
 import { Authcontext } from "../components/context/Authcontact";
->>>>>>> main
 const AdminDashboard = () => {
   const { api } = useContext(ShopContext);
   const { user } = useContext(Authcontext);
