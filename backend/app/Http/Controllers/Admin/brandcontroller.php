@@ -16,11 +16,21 @@ class brandcontroller extends Controller
             ]
             );
     }
+    public function getbrand (Request $request){
+        $brand=Brand::all()->where('status',1);
+        return response()->json(
+            [
+                "status" => 200,
+                "brand" =>  $brand
+            ]
+            );
+    }
     public function stor (Request $request){
         $brand = new Brand();
         $brand->name = $request->name;
         $brand->status = $request->status;
         $brand->save();
+        $brand->categories()->attach($request->category_ids);
 
         return response()->json([
             "status" => 201,
@@ -47,7 +57,7 @@ class brandcontroller extends Controller
     }
     public function show($id,Request $request)
     {
-        $brand=Brand::find($id);
+        $brand=Brand::with("categories")->find($id);
 
         if(!$brand){
             return response()->json([

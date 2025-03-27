@@ -1,5 +1,5 @@
 
-import { useContext,  useState } from "react";
+import { useContext,  useEffect,  useState } from "react";
 import { ShopContext } from "../components/context/Shopcontext";
 import {Link,useParams,useNavigate} from "react-router-dom"
 import { Authcontext } from "../components/context/Authcontact";
@@ -8,6 +8,7 @@ const Adminproduct = () => {
   const   navigator = useNavigate();
   const param = useParams();
   const [list, setlist] = useState("list");
+  const [product,setproduct] = useState([])
   const [formdata, setformdata] = useState({
     title: "",
     category_id: "",
@@ -17,9 +18,10 @@ const Adminproduct = () => {
     status: "",
     description: "",
     image: "",
+    old_image: null,
   });
   const {user} = useContext(Authcontext)
-  const { category, brand,api,all_product } = useContext(ShopContext);
+  const { category, brand,api } = useContext(ShopContext);
 
   const handlechange = (e) => {
     setformdata({
@@ -28,10 +30,10 @@ const Adminproduct = () => {
     });
   };
   const handleImageChange = (e) => {
-    setformdata((prevState) => ({
-      ...prevState,
+    setformdata({
+      ...formdata,
       image: e.target.files[0],
-    }));
+    });
   };
 
   
@@ -48,17 +50,21 @@ const Adminproduct = () => {
       formData.append("status", formdata.status);
       formData.append("description", formdata.description); 
       formData.append("image", formdata.image); 
-      console.log(formData);
+      console.log(formdata);
 
-      const response = await fetch(`${api}products`, {
+      const response = await fetch(`${api}product`, {
         method: "POST",
+        headers: {
+         
+           "Authorization": `Bearer ${user.token}`
+        },
         body: formData,
       });
 
       const json = await response.json();
 
       if (json.status === 201) {
-        all_product.push(json.product);
+       getproduct();
         setlist("list"); 
         setformdata({
           title: "",
@@ -70,6 +76,51 @@ const Adminproduct = () => {
           description: "",
           image: "",
         })
+
+      } else if (json.status === 400) {
+        console.error("Validation Errors:", json.errors);
+      } else {
+        console.error("Error:", json.message);
+      }
+    } catch (error) {
+      console.error("Error adding product", error);
+    }
+  };
+  const updateproduct = async (e) => {
+    e.preventDefault();
+    try {
+      const formData = new FormData();
+      formData.append("title", formdata.title);
+      formData.append("category_id", formdata.category_id);
+      formData.append("brand_id", formdata.brand_id);
+      formData.append("price", formdata.price);
+      formData.append("quantity", formdata.quantity);
+      formData.append("status", formdata.status);
+      formData.append("description", formdata.description); 
+      formData.append("_method", "PUT");
+      if (formdata.image) {
+        formData.append("image", formdata.image);
+      } else {
+        formData.append("old_image", formdata.old_image); // Send old image if not updating
+      }
+  
+
+      const response = await fetch(`${api}product/${param.id}`, {
+        method: "POST",
+        headers: {
+         
+           Authorization: `Bearer ${user.token}`
+        },
+        body: formData,
+      });
+
+      const json = await response.json();
+
+      if (json.status === 200) {
+       getproduct();
+        setlist("list"); 
+        navigator("/admin/product");
+      
 
       } else if (json.status === 400) {
         console.error("Validation Errors:", json.errors);
@@ -94,8 +145,7 @@ const Adminproduct = () => {
       })
       const data = await respone.json()
       if(data.status == 200){
-        const updatedProducts = all_product;
-        all_product.push(...updatedProducts); 
+       getproduct();
         
         setlist("list"); 
         navigator("/admin/product");
@@ -105,6 +155,62 @@ const Adminproduct = () => {
         
     }
   }
+
+    const getproduct = async()=>{
+          const respones = await fetch(`${api}product`,{
+              method:"GET",
+              headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'application/json',
+                  "Authorization": `Bearer ${user.token}`
+              }
+              
+          })
+  
+          const data = await respones.json();
+  
+          if(data.status == 200){
+              setproduct(data.products)
+          }
+      }
+
+      const showProducts = async () => {
+        try {
+          const response = await fetch(`${api}product/${param.id}`,
+          {
+            method: "GET",
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${user.token}`
+            }
+          }
+          );
+          const json = await response.json();
+          console.log(json);
+          
+          
+          setformdata({
+            title: json.product.title,
+            category_id: json.product.category_id,
+            brand_id: json.product.brand_id,
+            price: json.product.price,
+            quantity: json.product.quantity,
+            status: json.product.status,
+            description: json.product.description,
+            image: null,
+            old_image: json.product.image, // Store the old image
+          });
+        } catch (error) {
+          console.error("Error fetching products:", error);
+        }
+      };
+
+      useEffect(()=>{
+          getproduct()
+          showProducts()
+      },[param.id])
+      
 
   return (
     <>
@@ -144,7 +250,7 @@ const Adminproduct = () => {
                   </tr>
                 </thead>
                 <tbody className="text-white">
-                  {all_product.map((product) => (
+                  {product.map((product) => (
                     <tr key={product.id} className="text-center">
                       <td className="text-white">{product.id}</td>
                       <td className="text-white">{product.category_id}</td>
@@ -165,7 +271,7 @@ const Adminproduct = () => {
                         <td className="text-danger">Disable</td>
                       )}
                       <td>
-                        <Link to={`/admin/product/edit/${product.id}`}> <button className="btn btn-success" >Edit</button> </Link> 
+                        <Link to={`/admin/product/edit/${product.id}`}> <button className="btn btn-success" onClick={()=>setlist("add")} >Edit</button> </Link> 
                       <Link to={`/admin/product/${product.id}`}> <button className="btn btn-danger" onClick={deleteproduct}>Delete</button> </Link> 
                       </td>
                     </tr>
@@ -194,7 +300,7 @@ const Adminproduct = () => {
                   Back
                 </button>
               </div>
-              <form className="text-white" onSubmit={addproduct}>
+              <form className="text-white" onSubmit={param.id ? updateproduct : addproduct}>
                 <div className="form-group text-start">
                   <label htmlFor="title">Product Title</label>
                   <input
@@ -265,6 +371,7 @@ const Adminproduct = () => {
                     className="form-control bg-secondary text-white "
                     id="status"
                     onChange={handlechange}
+                    value={formdata.status}
                   >
                      <option value="">Select Status</option>
                     <option value="1">Enable</option>
@@ -288,23 +395,26 @@ const Adminproduct = () => {
                     className="form-control text-white"
                     id="image"
                     onChange={handleImageChange}
+                   
                   />
+                   {formdata.old_image && (
+                      <div>
+                        <p>Current Image:</p>
+                        <img src={`http://localhost:8000/uploads/${formdata.old_image}`} alt="Current Product" width="350" height={100} />
+                      </div>
+                    )}
                 </div>
 
-                <button
-                  type="submit"
-                  style={{
-                    color: "white",
-                    background: "blue",
-                    border: "1px solid blue",
-                    borderRadius: "7px",
-                    marginLeft: "-990px",
-                  }}
-                  className="mt-3"
-                  onSubmit={addproduct}
-                >
-                  Add product
-                </button>
+                <button type="submit" className=" mt-3" style={{
+                color: "white",
+                background: "blue",
+                border: "1px solid blue",
+                borderRadius: "7px",
+                marginLeft: "-900px",
+              }}>
+            
+              {param.id ? "Update product" : "Add product"}
+            </button>
               </form>
             </div>
           ) : (

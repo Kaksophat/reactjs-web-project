@@ -1,49 +1,38 @@
 import { useContext, useEffect, useState } from "react";
 import { ShopContext } from "./context/Shopcontext";
-import { Authcontext } from "./context/Authcontact";
 
 const Selling_product = () => {
-  const [product, setProduct] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("all");
-  // const { addtocart } = useContext(ShopContext);
-  //  const { user } = useContext(Authcontext);
-    const [categorylist, setcategorylist] = useState([]);
-    console.log(categorylist);
-    
-    // console.log(user.token);
+  const { addtocart ,api} = useContext(ShopContext);
+  const [Products, setProducts] = useState([]);
+
+  const getproduct = async () => {
+    try {
+      const response = await fetch(`${api}bestSellingProducts`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      console.log(data);
+      
+      if (data.status === 200) {
+        setProducts(data.best_selling_products);
+      }
+    } catch (error) {
+      console.error("Error fetching products", error);
+    }
+  };
+     
 
 
   useEffect(() => {
-    // fetch("http://localhost:8000/api/sellerproduct")
-    //   .then((res) => res.json())
-    //   .then((json) => {
-    //     setProduct(json.product);
-    //   })
-      // .catch((error) => console.error("Fetch error:", error));
-      const category = async () => {
-        const respones = await fetch("http://localhost:8000/api/categories", {
-          method: "GET",
-       
-        });
-  
-        const data = await respones.json();
-        if (data.status == 200) {
-          setcategorylist(data.category);
-        }
-      };
-  
-      category();
-      
+    
+      getproduct();
   },[]);
 
-  const filteredProducts = 
-    selectedCategory === "all"
-      ? product
-      : product.filter((item) => item.category_id === selectedCategory);
-
-  const handleTabClick = (categoryId) => {
-    setSelectedCategory(categoryId);
-  };
+ 
 
   return (
     <>
@@ -55,42 +44,22 @@ const Selling_product = () => {
           <div className="section-header">
             <h2 className="section-title">Best selling products</h2>
           </div>
-          <ul className="tabs list-unstyled">
-            <li
-              onClick={() => handleTabClick("all")}
-              className={`tab ${selectedCategory === "all" ? "active" : ""}`}
-            >
-              All
-            </li>
-  
-            {categorylist.map((category) => (
-              <li
-                key={category.id}
-                onClick={() => handleTabClick(category.id)}
-                className={`tab ${selectedCategory === category.id ? "active" : ""}`}
-              >
-                {category.name}
-              </li>
-            ))}
-             
-
-      
-          </ul>
+        
           <div className="tab-content">
             <div className="row d-flex flex-wrap">
-              {filteredProducts.map((item) => (
+              {Products.map((item) => (
             
                 <div
                   className="product-item col-lg-3 col-md-6 col-sm-6"
                   key={item.id}
-                  style={{ height: "600px" }}
+                  style={{width:"350px",height:"600px"}}
                 >
                   <div className="image-holder">
                     <img
                       src={item.image_url}
                       alt={item.title}
                       className="product-image"
-                      style={{ height: "400px", objectFit: "contain" }}
+                      style={{ height: "400px", objectFit: "cover" }}
                     />
                   </div>
                   <div className="cart-concern">
@@ -98,7 +67,7 @@ const Selling_product = () => {
                       <button
                         type="button"
                         className="btn-wrap cart-link d-flex align-items-center"
-                        onClick={()=> addtocart(item.id)}
+                        onClick={()=> addtocart(item)}
                       >
                         add to cart <i className="icon icon-arrow-io" />
                       </button>
@@ -119,7 +88,7 @@ const Selling_product = () => {
                       <a href="single-product.html">{item.title}</a>
                     </h3>
                     <div className="item-price text-primary">
-                      ${item.price.toFixed(2)}
+                      ${item.price}
                     </div>
                   </div>
                 </div>

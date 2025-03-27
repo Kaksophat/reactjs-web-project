@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Authcontext } from "../components/context/Authcontact";
 import { ShopContext } from "../components/context/Shopcontext";
 import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 const Adminlogin = () => {
   const { login } = useContext(Authcontext);
@@ -24,7 +25,7 @@ const Adminlogin = () => {
 console.log(formdata);
 
   const adminlogin = async (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
 
     try {
       const response = await fetch(`${api}login`, {
@@ -37,21 +38,25 @@ console.log(formdata);
       });
 
       const data = await response.json();
-      console.log("user",data);
       
 
       if (data.status === 200) {
+       
         const admininfo = {
           token: data.token,
-          name: data.name,
-          email: data.email,
-        };
+          name: data.data.name,
+          email: data.data.email,
+          id: data.id,
+        }
+        
 
-        localStorage.setItem("token", JSON.stringify(admininfo));
+
         login(admininfo);
+        console.log(data.token);
+        
         navigate("/admin/dashboard");
       } else {
-        setError(data.message || "Login failed. Please try again.");
+        setError(data.message || "Something went wrong. Please try again later.");
       }
     } catch (error) {
       console.error("Error during login:", error);

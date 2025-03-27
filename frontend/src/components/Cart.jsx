@@ -4,7 +4,7 @@ import { CiCircleRemove } from "react-icons/ci";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
-  const { cartitems } = useContext(ShopContext);
+  const { cartitems ,shipping,subtotal,grandtotal} = useContext(ShopContext);
   console.log("cart",cartitems);
   
 
@@ -32,7 +32,7 @@ const Cart = () => {
           <p>Products</p>
           <p>Title</p>
           <p>Price</p>
-          <p>Total</p>
+          <p>Quantity</p>
           <p>Remove</p>
         </div>
         <hr />
@@ -47,7 +47,7 @@ const Cart = () => {
                             </div>
                             <p>{item.title}</p>
                             <p>${item.price}</p>
-                            <p>${item.price * cartitems[item.id]}</p>
+                            <p>{item.quantity}</p>
                             <CiCircleRemove  className="removecart" />
                           </div>
                           <hr />
@@ -59,12 +59,28 @@ const Cart = () => {
           } 
           
 
-        <div className="cartitem-total">
+        <div className="cartitem-total" style={{color:"black"}}>
           <h1>Cart Total</h1>
-          <div className="total">
-            <h3>Total</h3>
-            {/* <p>${gettotalcart()}</p> */}
-          </div>
+          <div className="d-flex "style={{color:"black",gap:"150px"}}>
+                            <strong>Subtotal</strong>
+                            <strong>${subtotal()}</strong>
+                        </div>
+                        <hr style={{width:"300px"}}/>
+
+                        <div className="d-flex " style={{color:"black",gap:"150px"}}>
+                            <strong style={{color:"black"}}>Shipping</strong>
+                            <strong>${shipping()}</strong>
+                        </div>
+                        <hr style={{width:"300px"}}/>
+
+                        <div className="d-flex "style={{color:"black",gap:"130px"}}>
+                            <strong>Grand Total</strong>
+                            <strong>${grandtotal()}</strong>
+                        </div>
+                        <hr style={{width:"300px"}}/>
+
+
+          
       <Link to={"/checkout"}>   <button className="btn btn-danger">Proceed to checkout</button> </Link> 
 
           

@@ -1,6 +1,10 @@
+import { useContext } from "react";
+import { ShopContext } from "./context/Shopcontext";
 
 
 const Contact = () => {
+    const {setting} = useContext(ShopContext);
+  
   return (
     <>
          <section className="site-banner jarallax padding-large" style={{background: 'url(images/hero-image.jpg) no-repeat', backgroundPosition: 'top',marginTop:'200px'}}>
@@ -30,23 +34,55 @@ const Contact = () => {
             <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             <ul className="list-unstyled list-icon">
               <li>
-                <a href="#"><i className="icon icon-phone" />+1650-243-0000</a>
+                <a href="#"><i className="icon icon-phone" />{setting.phone}</a>
               </li>
               <li>
-                <a href="mailto:info@yourcompany.com"><i className="icon icon-mail" />info@yourcompany.com</a>
+                <a href="mailto:info@yourcompany.com"><i className="icon icon-mail" />{setting.email}</a>
               </li>
               <li>
-                <a href="#"><i className="icon icon-map-pin" />North Melbourne VIC 3051, Australia</a>
+                <a href="#"><i className="icon icon-map-pin" />{setting.address}</a>
               </li>
             </ul>
           </div>
           <div className="social-links">
             <h3>Social Links</h3>
             <ul className="d-flex list-unstyled">
-              <li><a href="#" className="icon icon-facebook" /></li>
-              <li><a href="#" className="icon icon-twitter" /></li>
-              <li><a href="#" className="icon icon-instagram" /></li>
-              <li><a href="#" className="icon icon-youtube-play" /></li>
+            <li>
+  <a 
+    href={setting?.facebook?.startsWith("http") ? setting.facebook : `https://${setting?.facebook}`} 
+    className="icon icon-facebook" 
+    target="_blank" 
+    rel="noopener noreferrer" 
+  />
+</li>
+
+<li>
+  <a 
+    href={setting?.twitter?.startsWith("http") ? setting.twitter : `https://${setting?.twitter}`} 
+    className="icon icon-twitter" 
+    target="_blank" 
+    rel="noopener noreferrer" 
+  />
+</li>
+
+<li>
+  <a 
+    href={setting?.instagram?.startsWith("http") ? setting.instagram : `https://${setting?.instagram}`} 
+    className="icon icon-instagram" 
+    target="_blank" 
+    rel="noopener noreferrer" 
+  />
+</li>
+
+<li>
+  <a 
+    href={setting?.youtube?.startsWith("http") ? setting.youtube : `https://${setting?.youtube}`} 
+    className="icon icon-youtube-play" 
+    target="_blank" 
+    rel="noopener noreferrer" 
+  />
+</li>
+
             </ul>
           </div>
         </div>
@@ -84,7 +120,7 @@ const Contact = () => {
   width="100%"
   height="500"
   id="gmap_canvas"
-  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=138%2Ctuke%20thla%2Csen%20sok&zoom=10&maptype=roadmap"
+  src={setting?.map}
   frameBorder="0"
   scrolling="no"
   marginHeight="0"

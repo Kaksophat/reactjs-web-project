@@ -3,64 +3,66 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\customer;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
     public function register(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            "name"=> "required",
-            "email"=> "required",
-            "password"=> "required",
-          
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string',
         ]);
 
-        if($validator->fails()){
-            return response()->json([
-                "status"=> 400,
-                "error"=> $validator->errors(),
-            ],400);
-        }
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password)
+            'password' => Hash::make($request->password),
         ]);
 
+        // $token = JWTAuth::fromUser($user);
 
         return response()->json([
-            'status' =>200,
-            'user' => $user
-        ]);
+            'data' => $user,
+            ], 201);
     }
-    public function login(Request $request)
+
+    
+        public function login(Request $request)
+        {
+            $credentials = $request->only(['email', 'password']);
+        
+            if (!$token = JWTAuth::attempt($credentials)) {
+                return response()->json(['error' => 'Unauthorized'], 401);
+            }
+        
+            return response()->json([
+                "status" => 200,
+                "data" => Auth::user(),
+                "token" => $token 
+            ]);
+        }
+        
+    
+
+    public function logout()
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|string'
-        ]);
+        Auth::guard('api')->logout();
 
-        $user = User::where('email', $request->email)->first();
-        if(!$user || !Hash::check($request->password, $user->password)){
-            return response()->json([
-                'status' => 401,
-                'message' => 'Unauthorized'
-            ]);
-        }
-        else{
-            $token = $user->createToken('authToken')->plainTextToken; 
-            return response()->json([
-                'status' => 200,
-                'token' => $token,
-                "name" => $user->name,
-                "email" => $user->email
-            ]);
-        }
-
-     
+        return response()->json(['message' => 'Successfully logged out']);
     }
+
+    public function me()
+    {
+        return response()->json(Auth::guard('api')->user());
+    }
+
+   
 }
