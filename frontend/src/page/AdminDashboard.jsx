@@ -5,16 +5,18 @@ import { TbChartInfographic } from "react-icons/tb";
 import Dashimg from './include/Dashimg.gif'
 import Revengimg from './include/Animation.gif'
 <<<<<<< HEAD
+<<<<<<< HEAD
 import ChartBoard from "./ChartBoard";
 =======
 <<<<<<< HEAD
 >>>>>>> ea10ad75c22480dda049779564a1a10fd74adee7
 
 =======
+=======
+>>>>>>> main
 import { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../components/context/Shopcontext";
 import { Authcontext } from "../components/context/Authcontact";
->>>>>>> main
 const AdminDashboard = () => {
   const { api } = useContext(ShopContext);
   const { user } = useContext(Authcontext);
@@ -114,8 +116,12 @@ const AdminDashboard = () => {
                   <h6 className="mb-0">Worldwide Sales</h6>
                   <a href>Show All</a>
                 </div>
+<<<<<<< HEAD
                 <ChartBoard/>
                 {/* <img src={Dashimg} alt="graph" style={{height:'100%'}} />
+=======
+                {/* <canvas id="worldwide-sales"></canvas> */}
+>>>>>>> main
                 <img src={Dashimg} alt="graph" style={{height:'100%'}} />
                 <img src={Dashimg} alt="graph" style={{height:'100%'}} />  */}
                </div>
@@ -133,7 +139,6 @@ const AdminDashboard = () => {
             </div> */}
           </div>
         </div>
-       
         <div className="container-fluid pt-4 px-4">
           <div className="bg-secondary text-center rounded p-4">
             <div className="d-flex align-items-center justify-content-between mb-4">

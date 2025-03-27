@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "@iconify/react": "^5.2.0",
-    "@mui/material": "^6.4.8",
-    "echarts": "^5.6.0",
-    "echarts-for-react": "^3.0.2"
-  }
-}
