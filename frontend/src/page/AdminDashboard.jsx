@@ -5,6 +5,10 @@ import { TbChartInfographic } from "react-icons/tb";
 import Dashimg from './include/Dashimg.gif'
 import Revengimg from './include/Animation.gif'
 <<<<<<< HEAD
+import ChartBoard from "./ChartBoard";
+=======
+<<<<<<< HEAD
+>>>>>>> ea10ad75c22480dda049779564a1a10fd74adee7
 
 =======
 import { useContext, useEffect, useState } from "react";
@@ -104,19 +108,19 @@ const AdminDashboard = () => {
         </div>
         <div className="container-fluid pt-4 px-4 justify-content-between">
           <div className="row g-4">
-            <div className="col-sm-12 col-xl-6">
+            <div className="col-sm-12 col-xl-8">
               <div className="bg-secondary text-center rounded p-4">
                 <div className="d-flex align-items-center justify-content-between mb-4">
                   <h6 className="mb-0">Worldwide Sales</h6>
                   <a href>Show All</a>
                 </div>
-                
+                <ChartBoard/>
+                {/* <img src={Dashimg} alt="graph" style={{height:'100%'}} />
                 <img src={Dashimg} alt="graph" style={{height:'100%'}} />
-                <img src={Dashimg} alt="graph" style={{height:'100%'}} />
-                <img src={Dashimg} alt="graph" style={{height:'100%'}} />
-              </div>
+                <img src={Dashimg} alt="graph" style={{height:'100%'}} />  */}
+               </div>
             </div>
-            <div className="col-sm-12 col-xl-6">
+            {/* <div className="col-sm-12 col-xl-6">
               <div className="bg-secondary text-center rounded p-4">
                 <div className="d-flex align-items-center justify-content-between mb-4">
                   <h6 className="mb-0">Salse &amp; Revenue</h6>
@@ -126,7 +130,7 @@ const AdminDashboard = () => {
                 <img src={Revengimg} alt="graph" style={{height:'100%'}} />
                 <img src={Revengimg} alt="graph" style={{height:'100%'}} />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
        

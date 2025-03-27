@@ -12,7 +12,9 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "@mui/material": "^6.4.8",
+    "@mui/material": "^6.4.9",
+    "@mui/styled-engine-sc": "^7.0.0",
+    "@mui/x-charts": "^7.28.0",
     "@paypal/react-paypal-js": "^8.7.0",
     "bootstrap": "^5.3.3",
 <<<<<<< HEAD
@@ -23,12 +25,20 @@
     "echarts": "^5.6.0",
     "echarts-for-react": "^3.0.2",
     "mdb-ui-kit": "^8.2.0",
+<<<<<<< HEAD
+    "react": "^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.0.2",
+    "styled-components": "^6.1.16"
+=======
 >>>>>>> 3def8d0a219dbeb70d1c8d92b7ff069ef7dae466
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.0.2",
     "react-toastify": "^11.0.5"
+>>>>>>> ea10ad75c22480dda049779564a1a10fd74adee7
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",
@@ -42,5 +52,9 @@
     "eslint-plugin-react-refresh": "^0.4.14",
     "globals": "^15.12.0",
     "vite": "^6.0.1"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0 || ^19.0.0"
   }
 }
