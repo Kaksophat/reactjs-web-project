@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # /.phpunit.cache
 # /node_modules
 # /public/build
@@ -21,7 +21,7 @@
 # /.nova
 # /.vscode
 # /.zed
-=======
+
 .phpunit.cache
 node_modules
 public/build
@@ -44,4 +44,4 @@ auth.json
 .nova
 .vscode
 .zed
->>>>>>> main
+
