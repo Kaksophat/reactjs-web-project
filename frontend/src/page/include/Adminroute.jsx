@@ -7,6 +7,7 @@ import Admineditproduct from "../Admineditproduct";
 import Category from "../Category";
 import Brand from "../Brand";
 import { Authrequird } from "../Authrequird";
+import Setting from "../Setting";
 const Adminroute = () => {
   return (
     <div>
@@ -30,6 +31,7 @@ const Adminroute = () => {
           <Route path="brand" element={<Brand/>}/>
           <Route path="brand/edit/:id" element={<Brand/>}/>
           <Route path="category/edit/:id" element={<Category/>}/>
+          <Route path="setting" element={<Setting/>}/>
         </Routes>
       
       
