@@ -84,7 +84,7 @@ const ShopContextprovider = (props) => {
 
     useEffect(()=>
     {
-        fetch(`${api}setting/2`, {
+        fetch(`${api}setting/1`, {
             method: "GET",
             headers: {
                 Accept: 'application/json',

@@ -35,6 +35,7 @@ Route::get("/setting/{id}",[settingcontroller::class,"index"]);
 
 
 
+    Route::post("/category",[categorycontroller::class,"stor"]);
 
 
 
@@ -47,7 +48,6 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/me', [AuthController::class, 'me']);
 
-    Route::post("/category",[categorycontroller::class,"stor"]);
     Route::get("/category",[categorycontroller::class,"index"]);
     Route::post("/brand",[brandcontroller::class,"stor"]);
     Route::get("/brand",[brandcontroller::class,"index"]);

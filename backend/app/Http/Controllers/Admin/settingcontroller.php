@@ -50,7 +50,16 @@ class settingcontroller extends Controller
         $imageabout = time().'.'.$request->image_about_us->extension();  
         $image_about_us->move(public_path('/uploads'), $imageabout);
 
+        $image = $request->file('image_favicon');
+        $imagef = time().'.'.$request->image_favicon->extension();  
+        $image->move(public_path('/uploads'), $imagef);
+
+
+
         $setting->image_logo = $imageName;
+        $setting->image_favicon = $image;
+
+
         $setting->about_us = $request->about_us;
         $setting->image_about_us = $imageabout;
         $setting->phone = $request->phone;

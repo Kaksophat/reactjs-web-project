@@ -36,10 +36,12 @@ class ProductController extends Controller
     
         $category = Product::with('category')->get();
         $brand = Product::with('brand')->get();
+        $products= product::all();
+
     
         return response()->json([
             "status" => 200,
-            "products" => $products,  
+            "products" => $products  ,
             "category" => $category,
             "brand" => $brand
         ]);
