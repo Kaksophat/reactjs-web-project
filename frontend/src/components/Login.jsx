@@ -75,7 +75,7 @@ const Login = () => {
         customerlogin(customerinfo);
         navigate("/");
       } else {
-        setError(data.message || "Login failed. Please try again.");
+        setError(data.error);
       }
     } catch (error) {
       console.error("Error during login:", error);

@@ -50,7 +50,7 @@ console.log("image",setting.email);
                 <div className="col-md-4 header-contact" >
                   <div className="shipping-purchase " >
                     <p>
-                      Lets talk! <strong>+57 444 11 00 35</strong>
+                      Lets talk! <strong>{setting.phone}</strong>
                     </p>
                   </div>
                 </div>

@@ -16,11 +16,10 @@ const Orderdetails = () => {
       setitems(data.order.items);
     }
   };
-  console.log(items);
 
   useEffect(() => {
     getorder();
-  });
+  },[]);
   return (
     <>
       <div className="container " style={{ marginTop: "30px" }}>
