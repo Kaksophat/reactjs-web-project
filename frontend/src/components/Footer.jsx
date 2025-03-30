@@ -9,7 +9,7 @@ const Footer = () => {
               <div className="icon-box">
                 <i className="icon icon-truck" />
                 <h4 className="block-title">
-                  <strong>Free shipping</strong> Over $200
+                  <strong>Free shipping</strong><br/> Over $200
                 </h4>
               </div>
             </div>
@@ -17,7 +17,7 @@ const Footer = () => {
               <div className="icon-box">
                 <i className="icon icon-return" />
                 <h4 className="block-title">
-                  <strong>Money back</strong> Return within 7 days
+                  <strong>Money back</strong><br/> Return within 7 days
                 </h4>
               </div>
             </div>
@@ -25,7 +25,7 @@ const Footer = () => {
               <div className="icon-box">
                 <i className="icon icon-tags1" />
                 <h4 className="block-title">
-                  <strong>Buy 4 get 5th</strong> 50% off
+                  <strong>Buy 4 get 5th</strong><br/> 50% off
                 </h4>
               </div>
             </div>
@@ -33,7 +33,7 @@ const Footer = () => {
               <div className="icon-box">
                 <i className="icon icon-help_outline" />
                 <h4 className="block-title">
-                  <strong>Any questions?</strong> experts are ready
+                  <strong>Any questions?</strong><br/> experts are ready
                 </h4>
               </div>
             </div>

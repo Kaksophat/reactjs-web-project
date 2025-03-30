@@ -164,6 +164,14 @@ const ShopContextprovider = (props) => {
         });
         return qty;
     };
+    //I wanna write code remove producrts
+    const decresqty = () => {
+        let qty = 1;
+        cartitems.forEach(item => {
+            qty -= parseInt(item.quantity);
+        });
+        return qty;
+    };
     const clearCart = () => {
         setcartiems([]);  // This will clear the cart from the context/state
       };
@@ -180,7 +188,8 @@ const ShopContextprovider = (props) => {
         grandtotal,
         clearCart,
         all_product,
-        setting
+        setting,
+        decresqty
     };
      
     return (

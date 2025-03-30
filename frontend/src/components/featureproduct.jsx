@@ -6,10 +6,16 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Featureproduct = () => {
     const {  addtocart,all_product } = useContext(ShopContext);
+    // const {addTofav,setfav}=useContext(ShopContext);
     const handleAddToCart = (item) => {
        addtocart(item);
        toast.success("Added to cart successfully!");
      };
+     
+    //  const handleAddToFav = (item) => {
+    //   addTofav(item);
+    //   toast.success("Added to cart successfully!");
+    // };
   return (
     <>
     <ToastContainer/>

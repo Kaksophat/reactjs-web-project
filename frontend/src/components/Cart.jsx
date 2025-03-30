@@ -7,9 +7,6 @@ const Cart = () => {
   const { cartitems ,shipping,subtotal,grandtotal} = useContext(ShopContext);
   console.log("cart",cartitems);
   
-
-
-
   return (
     <>
       <section className="site-banner jarallax min-height300 padding-large" style={{background: 'url(images/hero-image.jpg) no-repeat', backgroundPosition: 'top',marginTop:'200px'}}>

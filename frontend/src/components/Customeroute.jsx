@@ -13,6 +13,7 @@ import MyAccount from './Myaccount';
 import { Customerrequird } from './Customerrequird';
 import MyAccountroute from './MyAccountroute';
 import Comfirmorder from './Comfirmorder';
+import FavCart from './FavCart';
 
 const Customeroute = () => {
   return (
@@ -26,6 +27,7 @@ const Customeroute = () => {
         <Route path='/shop' element={<Shop/>}/>
         <Route path='/shop/:productid' element={<Displayproduct/>}/>
         <Route path='/cart' element={<Cart/>}/>
+        <Route path='/favorite' element={<FavCart/>}/>
         <Route path='/checkout' element={
           <Customerrequird>
           <Checkout/>

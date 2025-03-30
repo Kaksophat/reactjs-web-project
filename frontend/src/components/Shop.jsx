@@ -105,7 +105,7 @@ const Shop = () => {
               <h1 className="page-title">Shop Page</h1>
               <div className="breadcrumbs">
                 <span className="item">
-                  <a href="/">Home /</a>
+                  <Link to="/">Home /</Link>
                 </span>
                 <span className="item">Shop</span>
               </div>
