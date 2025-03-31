@@ -5,6 +5,7 @@ import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { Authcontext } from "../../components/context/Authcontact";
+import { IoSettingsSharp } from "react-icons/io5";
 const Header = () => {
   const {user,logout} = useContext(Authcontext)
   console.log("user",user.name);
@@ -34,6 +35,7 @@ const Header = () => {
       </div>
       <Link to="/admin/brand" className={`nav-item nav-link ${location.pathname === "/admin/brand" ? "active" : ""}`}>{<TbBrand4Chan style={{fontSize:'24px'}}/>} Brand </Link>
       <Link to="/admin/product" className={`nav-item nav-link ${location.pathname === "/admin/product" ? "active" : ""}`}>{<MdOutlineProductionQuantityLimits style={{fontSize:'24px'}} />}Product</Link>
+      <Link to="/admin/setting" className={`nav-item nav-link ${location.pathname === "/admin/setting" ? "active" : ""}`}>{<IoSettingsSharp style={{fontSize:'24px'}} />} Settings</Link>
       <button className={`nav-item nav-link `} onClick={()=>logout()}>{<MdOutlineProductionQuantityLimits style={{fontSize:'24px'}} />}Logout</button>
 
     

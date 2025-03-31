@@ -31,7 +31,7 @@ Route::get("/brands/{id}",[brandcontroller::class,"show"]);
 Route::get("/brands",[brandcontroller::class,"getbrand"]);
 Route::get("/products/{id}",[ProductController::class,"getsingleproduct"]);
 
-Route::get("/setting/{id}",[settingcontroller::class,"index"]);
+Route::get("/settings/{id}",[settingcontroller::class,"index"]);
 
 
 
@@ -67,5 +67,9 @@ Route::middleware('auth:api')->group(function () {
     Route::get("/count",[dashboardcontroller::class,"count"]);
 
     Route::post("/setting",[settingcontroller::class,"store"]);
+    Route::get("/setting/{id}",[settingcontroller::class,"show"]);
+    Route::put("/setting/{id}",[settingcontroller::class,"update"]);
+
+
 });
 

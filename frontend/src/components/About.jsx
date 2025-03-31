@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { ShopContext } from "./context/Shopcontext";
+import { Link } from "react-router-dom";
 
 
 const About = () => {
@@ -13,7 +14,7 @@ const About = () => {
         <h1 className="page-title">About us</h1>
         <div className="breadcrumbs">
           <span className="item">
-            <a href="index.html">Home /</a>
+            <Link to="/">Home /</Link>
           </span>
           <span className="item">About</span>
         </div>

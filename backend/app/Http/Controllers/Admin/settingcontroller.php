@@ -57,7 +57,7 @@ class settingcontroller extends Controller
 
 
         $setting->image_logo = $imageName;
-        $setting->image_favicon = $image;
+        $setting->image_favicon = $imagef;
 
 
         $setting->about_us = $request->about_us;
@@ -77,4 +77,63 @@ class settingcontroller extends Controller
             "setting" =>  $setting
         ], 201);
     }
+
+    public function show($id, Request $request) {
+        $setting = setting::find($id);
+
+        return response()->json([
+            "status" => 200,
+            "setting" => $setting
+        ]);
+        
+    }
+
+    public function update($id, Request $request)
+    {
+        $setting = Setting::find($id);
+    
+        if (!$setting) {
+            return response()->json([
+                "status" => 404,
+                "message" => "Setting not found"
+            ], 404);
+        }
+    
+        if ($request->hasFile('image_logo')) {
+            $imageLogo = time() . '.' . $request->image_logo->extension();
+            $request->image_logo->move(public_path('/uploads'), $imageLogo);
+            $setting->image_logo = $imageLogo;
+        }
+    
+        if ($request->hasFile('image_about_us')) {
+            $imageAboutUs = time() . '.' . $request->image_about_us->extension();
+            $request->image_about_us->move(public_path('/uploads'), $imageAboutUs);
+            $setting->image_about_us = $imageAboutUs;
+        }
+    
+        if ($request->hasFile('image_favicon')) {
+            $imageFavicon = time() . '.' . $request->image_favicon->extension();
+            $request->image_favicon->move(public_path('/uploads'), $imageFavicon);
+            $setting->image_favicon = $imageFavicon;
+        }
+    
+        $setting->about_us = $request->about_us ;
+        $setting->phone = $request->phone ;
+        $setting->email = $request->email ;
+        $setting->address = $request->address ;
+        $setting->map = $request->map;
+        $setting->facebook = $request->facebook ;
+        $setting->instagram = $request->instagram ;
+        $setting->twitter = $request->twitter ;
+        $setting->youtube = $request->youtube ;
+    
+        $setting->save();
+    
+        return response()->json([
+            "status" => 200,
+            "message" => "Settings updated successfully",
+            "setting" => $setting
+        ]);
+    }
+    
 }

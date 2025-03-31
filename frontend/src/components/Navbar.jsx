@@ -126,9 +126,16 @@ console.log("image",setting.email);
                       </Link>
                     </li>
                     <li>
-                      <a href="wishlist.html">
-                        <i className="icon icon-heart" />
+                      <Link to={"/favorite"}>
+<a href="wishlist.html">
+                      <div className="cart">
+                         <i className="icon icon-heart" />
+                        <div className="cart-count">{getqty()}</div>
+                      </div>
+                       
                       </a>
+                      </Link>
+                      
                     </li>
                     <li className="user-items search-item pe-3">
                       <a href="#" className="search-button">

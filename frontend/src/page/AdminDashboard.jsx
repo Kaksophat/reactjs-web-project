@@ -2,8 +2,6 @@ import { FaDollarSign } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa6";
 import { FiActivity } from "react-icons/fi";
 import { TbChartInfographic } from "react-icons/tb";
-import Dashimg from './include/Dashimg.gif'
-import Revengimg from './include/Animation.gif'
 import { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../components/context/Shopcontext";
 import { Authcontext } from "../components/context/Authcontact";
@@ -34,7 +32,8 @@ const AdminDashboard = () => {
           },
         });
 
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        if (!response.ok)
+          throw new Error(`HTTP error! Status: ${response.status}`);
 
         const data = await response.json();
         setData(data);
@@ -54,11 +53,13 @@ const AdminDashboard = () => {
               <div className="bg-secondary rounded d-flex align-items-center p-4">
                 <i className="fa fa-chart-line fa-3x text-primary" />
                 <div className="ms-3">
-                  <p className="mb-2" style={{textAlign:'start'}}>Total Sale</p>
+                  <p className="mb-2" style={{ textAlign: "start" }}>
+                    Total Sale
+                  </p>
                   <h6 className="mb-0">${data1.sales}</h6>
                 </div>
-                <div style={{marginLeft:'auto'}}>
-                <FaDollarSign style={{fontSize:'50'}} />
+                <div style={{ marginLeft: "auto" }}>
+                  <FaDollarSign style={{ fontSize: "50" }} />
                 </div>
               </div>
             </div>
@@ -66,11 +67,13 @@ const AdminDashboard = () => {
               <div className="bg-secondary rounded d-flex align-items-center p-4">
                 <i className="fa fa-chart-line fa-3x text-primary" />
                 <div className="ms-3">
-                  <p className="mb-2" style={{textAlign:'start'}}>Total User</p>
+                  <p className="mb-2" style={{ textAlign: "start" }}>
+                    Total User
+                  </p>
                   <h6 className="mb-0">{data1.customers}</h6>
                 </div>
-                <div style={{marginLeft:'auto'}}>
-                <FaUser  style={{fontSize:'50'}} />
+                <div style={{ marginLeft: "auto" }}>
+                  <FaUser style={{ fontSize: "50" }} />
                 </div>
               </div>
             </div>
@@ -78,11 +81,13 @@ const AdminDashboard = () => {
               <div className="bg-secondary rounded d-flex align-items-center p-4">
                 <i className="fa fa-chart-line fa-3x text-primary" />
                 <div className="ms-3">
-                  <p className="mb-2" style={{textAlign:'start'}}>Total Order</p>
+                  <p className="mb-2" style={{ textAlign: "start" }}>
+                    Total Order
+                  </p>
                   <h6 className="mb-0">{data1.orders}</h6>
                 </div>
-                <div style={{marginLeft:'auto'}}>
-                <FiActivity  style={{fontSize:'50'}} />
+                <div style={{ marginLeft: "auto" }}>
+                  <FiActivity style={{ fontSize: "50" }} />
                 </div>
               </div>
             </div>
@@ -90,11 +95,13 @@ const AdminDashboard = () => {
               <div className="bg-secondary rounded d-flex align-items-center p-4">
                 <i className="fa fa-chart-line fa-3x text-primary" />
                 <div className="ms-3">
-                  <p className="mb-2" style={{textAlign:'start'}}>Total Productsales</p>
+                  <p className="mb-2" style={{ textAlign: "start" }}>
+                    Total Productsales
+                  </p>
                   <h6 className="mb-0">{data1.products}</h6>
                 </div>
-                <div style={{marginLeft:'auto'}}>
-                <TbChartInfographic  style={{fontSize:'50'}} />
+                <div style={{ marginLeft: "auto" }}>
+                  <TbChartInfographic style={{ fontSize: "50" }} />
                 </div>
               </div>
             </div>
@@ -108,12 +115,12 @@ const AdminDashboard = () => {
                   <h6 className="mb-0">Worldwide Sales</h6>
                   <a href>Show All</a>
                 </div>
-               <ChatBoard/>
+                <ChatBoard />
               </div>
             </div>
             <div className="col-sm-12 col-xl-4">
               <div className="text-center rounded p-4">
-               <BasicPie/>
+                <BasicPie />
               </div>
             </div>
           </div>
@@ -140,35 +147,29 @@ const AdminDashboard = () => {
                   </tr>
                 </thead>
                 <tbody>
-                 {data1.order.map((item) => (
-                  
+                  {data1.order.map((item) => (
                     <tr key={item.id}>
-                      
-                    <td>
-                      <input className="form-check-input" type="checkbox" />
-                    </td>
-                    <td>{
-                      new Date(item.created_at).toLocaleDateString("en-GB", {
-                        day: "2-digit",
-                        month: "short",
-                        year: "numeric",
-                      })
-                      }</td>
-                    <td>{item.id}</td>
-                    <td>{item.name}</td>
-                    <td>${item.grand_total}</td>
-                    <td>{item.status}</td>
-                    <td>
-                      <a className="btn btn-sm btn-primary" href>
-                        Detail
-                      </a>
-                    </td>
-                  </tr>
-                ))} 
-                 
-                 
-              
-               
+                      <td>
+                        <input className="form-check-input" type="checkbox" />
+                      </td>
+                      <td>
+                        {new Date(item.created_at).toLocaleDateString("en-GB", {
+                          day: "2-digit",
+                          month: "short",
+                          year: "numeric",
+                        })}
+                      </td>
+                      <td>{item.id}</td>
+                      <td>{item.name}</td>
+                      <td>${item.grand_total}</td>
+                      <td>{item.status}</td>
+                      <td>
+                        <a className="btn btn-sm btn-primary" href>
+                          Detail
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>

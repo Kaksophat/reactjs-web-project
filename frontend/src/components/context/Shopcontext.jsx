@@ -84,7 +84,7 @@ const ShopContextprovider = (props) => {
 
     useEffect(()=>
     {
-        fetch(`${api}setting/1`, {
+        fetch(`${api}settings/1`, {
             method: "GET",
             headers: {
                 Accept: 'application/json',
@@ -161,6 +161,14 @@ const ShopContextprovider = (props) => {
         });
         return qty;
     };
+    //I wanna write code remove producrts
+    const decresqty = () => {
+        let qty = 1;
+        cartitems.forEach(item => {
+            qty -= parseInt(item.quantity);
+        });
+        return qty;
+    };
     const clearCart = () => {
         setcartiems([]); 
       };
@@ -207,7 +215,10 @@ const ShopContextprovider = (props) => {
         clearCart,
         all_product,
         setting,
-        removeitem
+
+        removeitem,
+        decresqty
+
     };
      
     return (

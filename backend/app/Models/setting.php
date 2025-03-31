@@ -19,4 +19,10 @@ class setting extends Model
         return asset('uploads/' . $this->image_about_us);
     }
 
+    public function getImageFavcionUrlAttribute()
+    {
+        return asset('uploads/' . $this->image_favicon);
+    }
+
+
 }
