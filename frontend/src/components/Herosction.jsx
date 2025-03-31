@@ -2,7 +2,7 @@
 const Herosction = () => {
   return (
     <>
-       <section id="billboard" className="overflow-hidden">
+       <section id="billboard" className="overflow-hidden" style={{marginTop:"170px"}}>
         <button className="button-prev">
           <i className="icon icon-chevron-left" />
         </button>

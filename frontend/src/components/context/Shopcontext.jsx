@@ -84,7 +84,7 @@ const ShopContextprovider = (props) => {
 
     useEffect(()=>
     {
-        fetch(`${api}setting/2`, {
+        fetch(`${api}setting/1`, {
             method: "GET",
             headers: {
                 Accept: 'application/json',
@@ -99,16 +99,14 @@ const ShopContextprovider = (props) => {
 
 
     const addtocart = (product) => {
-        if (!product || !product.id) return; // Safeguard to ensure product is valid
+        if (!product || !product.id) return; 
     
         let cart = [...cartitems];
         const existingProductIndex = cart.findIndex(cartItem => cartItem.product_id === product.id);
     
         if (existingProductIndex >= 0) {
-            // If the product exists in the cart, update the quantity
             cart[existingProductIndex].quantity += 1;
         } else {
-            // If the product doesn't exist, add it to the cart
             cart.push({
                 id: `${product.id}-${Math.floor(Math.random() * 10000)}`,
                 product_id: product.id,
@@ -121,7 +119,6 @@ const ShopContextprovider = (props) => {
     
         setcartiems(cart);
     
-        // Save the updated cart to localStorage based on whether user is logged in or not
         if (customer && customer.id) {
             localStorage.setItem(`cart_${customer.id}`, JSON.stringify(cart));
         } else {
@@ -165,8 +162,37 @@ const ShopContextprovider = (props) => {
         return qty;
     };
     const clearCart = () => {
-        setcartiems([]);  // This will clear the cart from the context/state
+        setcartiems([]); 
       };
+
+      const removeitem=(id)=>{
+        if (!id) return;
+
+      let cart = [...cartitems];
+      console.log(cart);
+      
+       const existingProductIndex = cart.findIndex(cartItem => cartItem.product_id === id);
+
+    if (existingProductIndex >= 0) {
+        if (cart[existingProductIndex].quantity > 1) {
+            cart[existingProductIndex].quantity -= 1;
+        } else {
+            
+            cart = cart.filter(cartItem => cartItem.product_id !== id);
+        }
+       }
+       setcartiems(cart);
+
+       if (customer && customer.id) {
+           localStorage.setItem(`cart_${customer.id}`, JSON.stringify(cart));
+       } else {
+           localStorage.setItem("guest_cart", JSON.stringify(cart));
+       }
+
+    }
+
+   
+      
 
     const Contextvalue = {
         cartitems,
@@ -180,7 +206,8 @@ const ShopContextprovider = (props) => {
         grandtotal,
         clearCart,
         all_product,
-        setting
+        setting,
+        removeitem
     };
      
     return (

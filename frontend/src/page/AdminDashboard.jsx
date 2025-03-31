@@ -7,6 +7,8 @@ import Revengimg from './include/Animation.gif'
 import { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../components/context/Shopcontext";
 import { Authcontext } from "../components/context/Authcontact";
+import ChatBoard from "./ChatBoard";
+import BasicPie from "./PieChatBoard";
 const AdminDashboard = () => {
   const { api } = useContext(ShopContext);
   const { user } = useContext(Authcontext);
@@ -99,28 +101,19 @@ const AdminDashboard = () => {
           </div>
         </div>
         <div className="container-fluid pt-4 px-4 justify-content-between">
-          <div className="row g-4">
-            <div className="col-sm-12 col-xl-6">
+          <div className="row g-4 d-flex align-items-center">
+            <div className="col-sm-12 col-xl-8">
               <div className="bg-secondary text-center rounded p-4">
                 <div className="d-flex align-items-center justify-content-between mb-4">
                   <h6 className="mb-0">Worldwide Sales</h6>
                   <a href>Show All</a>
                 </div>
-                {/* <canvas id="worldwide-sales"></canvas> */}
-                <img src={Dashimg} alt="graph" style={{height:'100%'}} />
-                <img src={Dashimg} alt="graph" style={{height:'100%'}} />
-                <img src={Dashimg} alt="graph" style={{height:'100%'}} />
+               <ChatBoard/>
               </div>
             </div>
-            <div className="col-sm-12 col-xl-6">
-              <div className="bg-secondary text-center rounded p-4">
-                <div className="d-flex align-items-center justify-content-between mb-4">
-                  <h6 className="mb-0">Salse &amp; Revenue</h6>
-                  <a href>Show All</a>
-                </div>
-                <img src={Revengimg} alt="graph" style={{height:'100%'}} />
-                <img src={Revengimg} alt="graph" style={{height:'100%'}} />
-                <img src={Revengimg} alt="graph" style={{height:'100%'}} />
+            <div className="col-sm-12 col-xl-4">
+              <div className="text-center rounded p-4">
+               <BasicPie/>
               </div>
             </div>
           </div>

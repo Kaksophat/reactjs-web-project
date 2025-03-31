@@ -4,7 +4,7 @@ import { CiCircleRemove } from "react-icons/ci";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
-  const { cartitems ,shipping,subtotal,grandtotal} = useContext(ShopContext);
+  const { cartitems ,shipping,subtotal,grandtotal,removeitem} = useContext(ShopContext);
   console.log("cart",cartitems);
   
 
@@ -48,7 +48,7 @@ const Cart = () => {
                             <p>{item.title}</p>
                             <p>${item.price}</p>
                             <p>{item.quantity}</p>
-                            <CiCircleRemove  className="removecart" />
+                            <CiCircleRemove  className="removecart" onClick={()=>removeitem(item.product_id)} />
                           </div>
                           <hr />
                         </div>
