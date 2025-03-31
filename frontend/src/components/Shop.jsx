@@ -170,7 +170,7 @@ const Shop = () => {
                               <i className="icon icon-screen-full" />
                               <span className="tooltip-text">Quick view</span>
                             </button>
-                            <button type="button" className="wishlist-btn">
+                            <button type="button" className="wishlist-btn" >
                               <i className="icon icon-heart" />
                             </button>
                           </div>

@@ -125,6 +125,34 @@ const ShopContextprovider = (props) => {
             localStorage.setItem("guest_cart", JSON.stringify(cart));
         }
     };
+    //add to favorite
+    const addtoFav = (product) => {
+        if (!product || !product.id) return; 
+    
+        let cart = [...cartitems];
+        const existingProductIndex = cart.findIndex(cartItem => cartItem.product_id === product.id);
+    
+        if (existingProductIndex >= 0) {
+            cart[existingProductIndex].quantity += 1;
+        } else {
+            cart.push({
+                id: `${product.id}-${Math.floor(Math.random() * 10000)}`,
+                product_id: product.id,
+                title: product.title,
+                image: product.image_url,
+                price: product.price,
+                quantity: 1
+            });
+        }
+    
+        setcartiems(cart);
+    
+        if (customer && customer.id) {
+            localStorage.setItem(`cart_${customer.id}`, JSON.stringify(cart));
+        } else {
+            localStorage.setItem("guest_cart", JSON.stringify(cart));
+        }
+    };
     
     
     // const clearCartOnLogout = () => {
