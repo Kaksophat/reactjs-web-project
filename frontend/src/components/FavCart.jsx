@@ -5,12 +5,11 @@ import { CiCircleRemove } from "react-icons/ci";
 import { toast } from "react-toastify";
 
 export default function FavCart() {
-  const { cartitems, shipping, subtotal, grandtotal, removeitem,  addtocart} =
+  const { favitems, shipping, subtotal, grandtotal, removeitem,  addtocart} =
     useContext(ShopContext);
-  console.log("cart", cartitems);
-   const handleAddToCart = (item) => {
-      addtocart(item);
-      toast.success("Added to cart successfully!");
+  console.log("Favorite", favitems);
+   const handleAddToCart = (items) => {
+      addtocart(items,"favorite");
     };
   return (
     <>
@@ -44,8 +43,8 @@ export default function FavCart() {
           <p>Remove</p>
         </div>
         <hr />
-        {cartitems &&
-          cartitems.map((item) => {
+        {favitems &&
+          favitems.map((item) => {
             return (
               <div key={item.id}>
                 <div className="cartitem-format cartitem-format-main">

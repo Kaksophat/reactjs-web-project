@@ -1,15 +1,17 @@
 /* eslint-disable react/prop-types */
 import { createContext, useState, useEffect, useContext } from "react";
 import { Authcontext } from "./Authcontact";
+import { toast } from "react-toastify";
 
 export const ShopContext = createContext(null);
 
 const ShopContextprovider = (props) => {
+    const [favitems, setFavItems] = useState([]);
     const [cartitems, setcartiems] = useState([]);
     const [all_product, setproduct] = useState([]);
     const [category, setcategory] = useState([]);
     const [setting, setsetting] = useState({});
-
+  
 
     const [brand, setbrand] = useState([]);
     const { customer,user} = useContext(Authcontext);
@@ -98,17 +100,17 @@ const ShopContextprovider = (props) => {
     )
 
 
-    const addtocart = (product) => {
+    const addtocart = (product, type) => {
         if (!product || !product.id) return; 
     
-        let cart = [...cartitems];
-        const existingProductIndex = cart.findIndex(cartItem => cartItem.product_id === product.id);
+        let items = type === "cart" ? [...cartitems] : [...favitems]; 
+        const existingProductIndex = items.findIndex(item => item.product_id === product.id);
     
         if (existingProductIndex >= 0) {
-            cart[existingProductIndex].quantity += 1;
+            items[existingProductIndex].quantity += 1;
         } else {
-            cart.push({
-                id: `${product.id}-${Math.floor(Math.random() * 10000)}`,
+            items.push({
+                id: `${product.id}-${Math.floor(Math.random() * 10000)}`, // Unique ID
                 product_id: product.id,
                 title: product.title,
                 image: product.image_url,
@@ -117,42 +119,23 @@ const ShopContextprovider = (props) => {
             });
         }
     
-        setcartiems(cart);
+        if (type === "cart") {
+            setcartiems(items);
+            
+        } else {
+            setFavItems(items);
+        }
     
         if (customer && customer.id) {
-            localStorage.setItem(`cart_${customer.id}`, JSON.stringify(cart));
+            localStorage.setItem(`${type}_${customer.id}`, JSON.stringify(items));
         } else {
-            localStorage.setItem("guest_cart", JSON.stringify(cart));
+            localStorage.setItem(`${type}_${customer.id}`, JSON.stringify(items));
         }
+        toast.success(`Added to ${type === "cart" ? "cart" : "favorite"} successfully!`);
     };
-    //add to favorite
-    const addtoFav = (product) => {
-        if (!product || !product.id) return; 
     
-        let cart = [...cartitems];
-        const existingProductIndex = cart.findIndex(cartItem => cartItem.product_id === product.id);
-    
-        if (existingProductIndex >= 0) {
-            cart[existingProductIndex].quantity += 1;
-        } else {
-            cart.push({
-                id: `${product.id}-${Math.floor(Math.random() * 10000)}`,
-                product_id: product.id,
-                title: product.title,
-                image: product.image_url,
-                price: product.price,
-                quantity: 1
-            });
-        }
-    
-        setcartiems(cart);
-    
-        if (customer && customer.id) {
-            localStorage.setItem(`cart_${customer.id}`, JSON.stringify(cart));
-        } else {
-            localStorage.setItem("guest_cart", JSON.stringify(cart));
-        }
-    };
+
+   
     
     
     // const clearCartOnLogout = () => {
@@ -182,13 +165,17 @@ const ShopContextprovider = (props) => {
    const grandtotal=()=>{
      return subtotal() + shipping();
    }
-    const getqty = () => {
-        let qty = 0;
-        cartitems.forEach(item => {
-            qty += parseInt(item.quantity);
-        });
-        return qty;
-    };
+   const getqty = (type) => {
+    let qty = 0;
+    const items = type === "cart" ? cartitems : favitems; // Choose cart or favorites
+
+    items.forEach(item => {
+        qty += parseInt(item.quantity) || 1; // Ensure default quantity for favorites
+    });
+
+    return qty;
+};
+
     //I wanna write code remove producrts
     const decresqty = () => {
         let qty = 1;
@@ -231,6 +218,7 @@ const ShopContextprovider = (props) => {
       
 
     const Contextvalue = {
+        favitems,
         cartitems,
         addtocart,
         getqty,

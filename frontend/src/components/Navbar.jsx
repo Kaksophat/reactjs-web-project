@@ -121,7 +121,7 @@ console.log("image",setting.email);
                       <Link to={"/cart"}>
                         <div className="cart">
                           <i className="icon icon-shopping-cart" />
-                          <div className="cart-count">{getqty()}</div>
+                          <div className="cart-count">{getqty("cart")}</div>
                         </div>
                       </Link>
                     </li>
@@ -130,7 +130,7 @@ console.log("image",setting.email);
 <a href="wishlist.html">
                       <div className="cart">
                          <i className="icon icon-heart" />
-                        <div className="cart-count">{getqty()}</div>
+                        <div className="cart-count">{getqty("favorite")}</div>
                       </div>
                        
                       </a>
