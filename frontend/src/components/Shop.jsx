@@ -38,12 +38,11 @@ const Shop = () => {
   
 
   const handleAddToCart = (item) => {
-    addtocart(item);
-    toast.success("Added to cart successfully!");
+    addtocart(item,"cart");
   };
- 
-  
-
+  const handleAddToFav = (item) => {
+    addtocart(item,"favorite");
+  };
   const getProducts = async () => {
  
     try {
@@ -170,8 +169,8 @@ const Shop = () => {
                               <i className="icon icon-screen-full" />
                               <span className="tooltip-text">Quick view</span>
                             </button>
-                            <button type="button" className="wishlist-btn">
-                              <i className="icon icon-heart" />
+                            <button type="button" className="wishlist-btn" >
+                              <i className="icon icon-heart" onClick={()=>handleAddToFav(item)}/>
                             </button>
                           </div>
                         </div>
