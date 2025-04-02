@@ -121,7 +121,7 @@ class settingcontroller extends Controller
         $setting->phone = $request->phone ;
         $setting->email = $request->email ;
         $setting->address = $request->address ;
-        $setting->map = $request->map;
+        $setting->map = $setting->map;
         $setting->facebook = $request->facebook ;
         $setting->instagram = $request->instagram ;
         $setting->twitter = $request->twitter ;

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class setting extends Model
 {
-    protected $appends = ['image_url','image_about_us_url'];
+    protected $appends = ['image_url','image_about_us_url','image_favicon_url'];
 
     public function getImageUrlAttribute()
     {
@@ -19,10 +19,11 @@ class setting extends Model
         return asset('uploads/' . $this->image_about_us);
     }
 
-    public function getImageFavcionUrlAttribute()
+    public function getImageFaviconUrlAttribute()
     {
         return asset('uploads/' . $this->image_favicon);
     }
+    
 
 
 }
